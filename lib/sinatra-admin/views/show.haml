@@ -1,0 +1,19 @@
+.main-menu
+  %span We are going to have here links for all registered routes
+
+.actions
+  %ul
+    %li
+      %a{href: "/admin/#{@route}"} Index
+    %li
+      %a{href: "/admin/#{@route}/#{@resource.id}/edit"} Edit
+
+.header
+  %h1="#{@model.to_s} - Show"
+
+.content
+  %div
+    - @model.attribute_names.each do |attr|
+      %div
+        %span= "#{attr}: "
+        %span= @resource.send(attr)

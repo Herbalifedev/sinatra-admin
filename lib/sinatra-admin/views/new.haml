@@ -1,0 +1,22 @@
+.main-menu
+  %span We are going to have here links for all registered routes
+
+.actions
+  %ul
+    %li
+      %a{href: "/admin/#{@route}"} Index
+
+.header
+  %h1="#{@model.to_s} - New"
+
+.content
+  %div
+    %form{method: 'post', action: "/admin/#{@route}/"}
+      %fieldset
+        - (@model.attribute_names - @model.protected_attributes.to_a).each do |attr|
+          %div
+            %label{for: "#{attr}"}= attr
+            %input{id: "#{attr}", type: "text", value: "#{@resource[attr]}", name: "data[#{attr}]"}
+            %span= @resource.errors[attr] if @resource.errors[attr].any?
+        %div
+          %button{type: "submit", id: "create"} Create
