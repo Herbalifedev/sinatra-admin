@@ -24,9 +24,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'capybara', '~> 2.4.1'
   spec.add_development_dependency 'cucumber', '~> 1.3.16'
   spec.add_development_dependency 'cucumber-sinatra', '~> 0.5.0'
+  spec.add_development_dependency 'database_cleaner'
 
   spec.add_dependency 'sinatra',         '~> 1.4.5'
   spec.add_dependency 'sinatra-contrib', '~> 1.4.2'
   spec.add_dependency 'haml',            '~> 4.0.5'
-  spec.add_dependency 'activesupport',   '~> 3.2.19'
+  spec.add_dependency 'activesupport'
 end
