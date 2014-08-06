@@ -17,12 +17,17 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler",  "~> 1.6"
-  spec.add_development_dependency "rake",     "~> 10.0"
-  spec.add_development_dependency "rspec",    "~> 3.0.0"
+  spec.add_development_dependency 'mongoid',  '~> 3.1.6'
+  spec.add_development_dependency 'bundler',  '~> 1.6'
+  spec.add_development_dependency 'rake',     '~> 10.0'
+  spec.add_development_dependency 'rspec',    '~> 3.0.0'
+  spec.add_development_dependency 'capybara', '~> 2.4.1'
+  spec.add_development_dependency 'cucumber', '~> 1.3.16'
+  spec.add_development_dependency 'cucumber-sinatra', '~> 0.5.0'
+  spec.add_development_dependency 'database_cleaner'
 
-  spec.add_dependency "sinatra"
-  spec.add_dependency 'sinatra-contrib'
-  spec.add_dependency 'haml',           '~> 4.0.5'
-  spec.add_dependency 'activesupport',  '~> 4.0.0'
+  spec.add_dependency 'sinatra',         '~> 1.4.5'
+  spec.add_dependency 'sinatra-contrib', '~> 1.4.2'
+  spec.add_dependency 'haml',            '~> 4.0.5'
+  spec.add_dependency 'activesupport'
 end

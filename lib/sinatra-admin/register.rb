@@ -31,10 +31,6 @@ module SinatraAdmin
             @route = route
           end
 
-          before "/#{route}/:id/?*" do
-            @resource = model.find(params[:id])
-          end
-
           #INDEX
           get "/#{route}/?" do
             @collection = model.all.entries
@@ -61,16 +57,19 @@ module SinatraAdmin
 
           #SHOW
           get "/#{route}/:id/?" do
+            @resource = model.find(params[:id])
             haml :show, format: :html5
           end
 
           #EDIT
           get "/#{route}/:id/edit/?" do
+            @resource = model.find(params[:id])
             haml :edit, format: :html5
           end
 
           #UPDATE
           put "/#{route}/:id/?" do
+            @resource = model.find(params[:id])
             if @resource.update_attributes(params[:data])
               puts "Resource was updated"
               redirect to("/admin/#{@route}/#{@resource.id}")
@@ -82,6 +81,7 @@ module SinatraAdmin
 
           #DESTROY
           delete "/#{route}/:id/?" do
+            @resource = model.find(params[:id])
             if @resource.destroy
               puts "Resource was destroyed"
               redirect to("/admin/#{route}/")

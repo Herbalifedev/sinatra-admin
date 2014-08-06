@@ -1,6 +1,3 @@
-.main-menu
-  %span We are going to have here links for all registered routes
-
 .actions
   %ul
     %li
@@ -16,17 +13,22 @@
         - @model.attribute_names.each do |attr|
           %th= attr
     %tbody
-      - @collection.each do |record|
-        %tr
-          - @model.attribute_names.each do |attr|
-            - if attr.eql?('_id')
-              %td
-                %a{href: "/admin/#{@route}/#{record.send(attr)}"}
+      - if @collection.any?
+        - @collection.each do |record|
+          %tr
+            - @model.attribute_names.each do |attr|
+              - if attr.eql?('_id')
+                %td
+                  %a{href: "/admin/#{@route}/#{record.send(attr)}"}
+                    = record.send(attr)
+              - else
+                %td
                   = record.send(attr)
-            - else
-              %td
-                = record.send(attr)
-          %td
-            %form{method: 'post', action: "/admin/#{@route}/#{record.id}"}
-              %input{name: "_method", type: "hidden", value: "delete"}
-              %button{type: "submit", id: "delete"} Delete
+            %td
+              %form{method: 'post', action: "/admin/#{@route}/#{record.id}"}
+                %input{name: "_method", type: "hidden", value: "delete"}
+                %button{type: "submit", id: "delete_#{record.id}"} Delete
+      - else
+        %tr
+          %td{colspan: "#{@model.attribute_names.size}"}
+            %h5 There are not records in the database
