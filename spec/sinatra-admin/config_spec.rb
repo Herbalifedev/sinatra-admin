@@ -1,8 +1,10 @@
 require 'spec_helper'
 
+class User; end
+
 describe SinatraAdmin::Config do
   describe ':ATTRIBUTES' do
-    let(:expected_attrs) { %i(root) }
+    let(:expected_attrs) { [:root, :admin_model] }
     it { expect(described_class::ATTRIBUTES).to eq(expected_attrs) }
   end
 
@@ -48,6 +50,28 @@ describe SinatraAdmin::Config do
         it 'returns first registered route' do
           expect(subject.default_route).to eq('/admin/tags')
         end
+      end
+    end
+  end
+
+  describe '#admin_model' do
+    context 'when model_name was initialized with User' do
+      before do
+        subject.admin_model = User
+      end
+
+      it 'returns User' do
+        expect(subject.admin_model).to eq(User)
+      end
+    end
+
+    context 'when model_name was not initialized' do
+      before do
+        subject.admin_model = nil
+      end
+
+      it 'returns SinatraAdmin::Admin' do
+        expect(subject.admin_model).to eq(SinatraAdmin::Admin)
       end
     end
   end

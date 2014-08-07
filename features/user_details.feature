@@ -4,10 +4,20 @@ Feature: User show
   I want to see the details for each user when I register the "User" resource
   And I clik on an id link
 
+  Scenario: Admin tries to see user details thithout login
+    Given I add SinatraAdmin as middleware
+    And I register "User" resource
+    And I am an Admin
+    And There are users
+    When I go to users listing
+    Then I should see "Login - SinatraAdmin"
+    And I should see "You must log in"
+
   Scenario: Admin sees user details when clicks the _id link
     Given I add SinatraAdmin as middleware
     And I register "User" resource
     And I am an Admin
+    And I am logged in as admin
     And There are users
     And I am on users listing
     When I click on Carlo id

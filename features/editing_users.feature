@@ -3,10 +3,20 @@ Feature: Users edit
   As an Admin
   I want to edit users records when I register the "User" resource
 
+  Scenario: Admin tries to edit a record without login
+    Given I add SinatraAdmin as middleware
+    And I register "User" resource
+    And I am an Admin
+    And There are users
+    When I go to users listing
+    Then I should see "Login - SinatraAdmin"
+    And I should see "You must log in"
+
   Scenario: Admin edits a record without errors
     Given I add SinatraAdmin as middleware
     And I register "User" resource
     And I am an Admin
+    And I am logged in as admin
     And There are users
     And I am on users listing
     And I click on Carlo id
@@ -26,6 +36,7 @@ Feature: Users edit
     Given I add SinatraAdmin as middleware
     And I register "User" resource
     And I am an Admin
+    And I am logged in as admin
     And There are users
     And I am on users listing
     And I click on Carlo id

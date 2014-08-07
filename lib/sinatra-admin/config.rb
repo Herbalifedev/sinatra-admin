@@ -1,6 +1,6 @@
 module SinatraAdmin
   class Config
-    ATTRIBUTES = %i(root)
+    ATTRIBUTES = [:root, :admin_model]
 
     ATTRIBUTES.each do |attr|
       attr_accessor attr
@@ -16,6 +16,10 @@ module SinatraAdmin
           raise RegistrationException, 'You should register at least one resource' if routes.empty?
           "/admin/#{routes.first}"
         end
+    end
+
+    def admin_model
+      @admin_model ||= SinatraAdmin::Admin
     end
 
     # Store all registered routes.

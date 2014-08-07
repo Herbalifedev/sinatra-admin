@@ -12,6 +12,8 @@ module NavigationHelpers
 
     when /the home page/
       '/admin'
+    when /the login page/
+      '/admin/login'
     when /users listing/
       '/admin/users'
     else

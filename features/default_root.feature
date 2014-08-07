@@ -3,11 +3,22 @@ Feature: Default root
   As an Admin
   I want to either define a root resource or allow SinatraAdmin to use the first registered
 
+  Scenario: Admin tries to visit root without login
+    Given I add SinatraAdmin as middleware
+    And I register "User" resource
+    And I register "Comment" resource
+    And I am an Admin
+    And I define "User" as root resource
+    When I go to the home page
+    Then I should see "Login - SinatraAdmin"
+    And I should see "You must log in"
+
   Scenario: Admin is redirected to defined root resource when it's defined
     Given I add SinatraAdmin as middleware
     And I register "User" resource
     And I register "Comment" resource
     And I am an Admin
+    And I am logged in as admin
     And I define "User" as root resource
     When I go to the home page
     Then I should see "Users - Index"
@@ -22,6 +33,7 @@ Feature: Default root
     And I register "Comment" resource
     And I register "User" resource
     And I am an Admin
+    And I am logged in as admin
     When I go to the home page
     Then I should see "Users - Index"
     And I should see "_id"
