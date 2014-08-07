@@ -5,9 +5,13 @@
     %title Sinatra Admin
 
   %body
-    .top-bar
+    .top-bar{style: "height:30px;"}
       .main-menu
-        %span We are going to have here links for all registered routes
+        %ul{style: "list-style-type:none;"}
+          - SinatraAdmin.config.routes.each do |route|
+            %li{style: "float:left; padding-right:15px;"}
+              %a{href: "/admin/#{route}"}= route.humanize
+
       .logout{style: "float:right;"}
         %a{href: "/admin/logout"} Logout
 

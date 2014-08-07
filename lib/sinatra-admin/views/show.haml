@@ -1,12 +1,12 @@
+.header
+  %h1="#{@model.to_s} - Show"
+
 .actions
   %ul
     %li
       %a{href: "/admin/#{@route}"} Index
     %li
       %a{href: "/admin/#{@route}/#{@resource.id}/edit"} Edit
-
-.header
-  %h1="#{@model.to_s} - Show"
 
 .content
   %div
