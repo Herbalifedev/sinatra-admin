@@ -4,6 +4,7 @@ require "sinatra-admin/version"
 require 'sinatra-admin/app'
 require 'sinatra-admin/register'
 require 'sinatra-admin/config'
+require 'sinatra-admin/models/admin'
 
 module SinatraAdmin
   class << self
@@ -11,12 +12,16 @@ module SinatraAdmin
       Register.add(constant_name)
     end
 
+    def config
+      @config ||= Config.new
+    end
+
     def root(default)
       config.root = default
     end
 
-    def config
-      @config ||= Config.new
+    def admin_model(constant_name)
+      config.admin_model = constant_name.constantize
     end
   end
 end

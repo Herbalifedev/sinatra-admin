@@ -1,0 +1,16 @@
+.header
+  %h1="Login - SinatraAdmin #{SinatraAdmin::VERSION}"
+
+.content
+  %div
+    %form{method: 'post', action: "/admin/login"}
+      %fieldset
+        %div
+          %label{for: "email"} Email
+          %input{id: "email", type: "text", value: params['data'].try(:[], 'email'), name: "data[email]"}
+        %div
+          %label{for: "password"} Password
+          %input{id: "password", type: "password", value: params['data'].try(:[], 'password'), name: "data[password]"}
+        %span= flash[:error]
+        %div
+          %button{type: "submit", id: "login"} Login

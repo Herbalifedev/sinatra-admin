@@ -1,6 +1,9 @@
 Given /^I am an Admin$/ do
-  #TODO 
-  #Add Admin login stuff
+  @admin = SinatraAdmin.config.admin_model.create(email: "admin@mail.com", password: "admin") 
+end
+
+Given /^I am logged in as admin$/ do
+  login_as @admin, scope: :admin
 end
 
 Given /^There are users$/ do

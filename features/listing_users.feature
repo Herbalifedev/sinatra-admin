@@ -3,10 +3,20 @@ Feature: Users listing
   As an Admin
   I want to see the all users when I register the "User" resource
 
+  Scenario: Admin tries to see user listing without login
+    Given I add SinatraAdmin as middleware
+    And I register "User" resource
+    And I am an Admin
+    And There are users
+    When I go to users listing
+    Then I should see "Login - SinatraAdmin"
+    And I should see "You must log in"
+
   Scenario: Admin sees user listing when there are records
     Given I add SinatraAdmin as middleware
     And I register "User" resource
     And I am an Admin
+    And I am logged in as admin
     And There are users
     When I go to users listing
     Then I should see "Users - Index"
@@ -25,6 +35,7 @@ Feature: Users listing
     Given I add SinatraAdmin as middleware
     And I register "User" resource
     And I am an Admin
+    And I am logged in as admin
     And There are not users
     When I go to users listing
     Then I should see "Users - Index"

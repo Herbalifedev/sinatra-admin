@@ -3,10 +3,19 @@ Feature: Creating Users
   As an Admin
   I want to create users when I register the "User" resource
 
+  Scenario: Admin tries to create a user without login
+    Given I add SinatraAdmin as middleware
+    And I register "User" resource
+    And I am an Admin
+    When I go to users listing
+    Then I should see "Login - SinatraAdmin"
+    And I should see "You must log in"
+
   Scenario: Admin creates user
     Given I add SinatraAdmin as middleware
     And I register "User" resource
     And I am an Admin
+    And I am logged in as admin
     And I am on users listing
     When I follow "New"
     And I fill in "first_name" with "Vahak"
@@ -26,6 +35,7 @@ Feature: Creating Users
     Given I add SinatraAdmin as middleware
     And I register "User" resource
     And I am an Admin
+    And I am logged in as admin
     And I am on users listing
     When I follow "New"
     And I fill in "first_name" with "Vahak"
