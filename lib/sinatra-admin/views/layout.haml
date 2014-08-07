@@ -5,8 +5,11 @@
     %title Sinatra Admin
 
   %body
-    .main-menu
-      %span We are going to have here links for all registered routes
+    .top-bar
+      .main-menu
+        %span We are going to have here links for all registered routes
+      .logout{style: "float:right;"}
+        %a{href: "/admin/logout"} Logout
 
     .wrapper
       =yield

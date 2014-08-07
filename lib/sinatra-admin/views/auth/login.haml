@@ -11,6 +11,6 @@
         %div
           %label{for: "password"} Password
           %input{id: "password", type: "password", value: params['data'].try(:[], 'password'), name: "data[password]"}
-        %span= flash[:error]
+        =styled_flash
         %div
           %button{type: "submit", id: "login"} Login
