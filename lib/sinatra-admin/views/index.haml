@@ -1,10 +1,10 @@
+.header
+  %h1="#{@model.to_s.pluralize} - Index"
+
 .actions
   %ul
     %li
       %a{href: "/admin/#{@route}/new"} New
-
-.header
-  %h1="#{@model.to_s.pluralize} - Index"
 
 .content
   %table
