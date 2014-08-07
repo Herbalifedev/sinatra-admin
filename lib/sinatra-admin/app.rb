@@ -56,6 +56,13 @@ module SinatraAdmin
         end
       end
 
+      get '/logout/?' do
+        warden.logout(:admin)
+        flash[:success] = 'Successfully logged out'
+        redirect to('/admin/login')
+      end
+
+
       post '/unauthenticated/?' do
         flash[:error] = warden.message || "You must log in"
         redirect to('/admin/login')
