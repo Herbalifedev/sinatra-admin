@@ -1,6 +1,7 @@
 require 'active_support/inflector'
 
 require "sinatra-admin/version"
+require "sinatra-admin/warden"
 require 'sinatra-admin/app'
 require 'sinatra-admin/register'
 require 'sinatra-admin/config'
