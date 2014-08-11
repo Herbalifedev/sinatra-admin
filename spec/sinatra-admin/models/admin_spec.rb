@@ -9,8 +9,13 @@ describe SinatraAdmin::Admin do
     expect(described_class < Mongoid::Document).to eq(true)
   end
 
+  it 'hashes password' do
+    expect(subject.password).not_to eql('admin')
+    expect(subject.password == 'admin').to eq(true)
+  end
+
   describe 'validations' do
-    [:email, :password].each do |required_attr|
+    [:email, :password_hash].each do |required_attr|
       it "#{required_attr} is required" do
         subject.send("#{required_attr}=", nil)
         subject.valid?
@@ -25,3 +30,4 @@ describe SinatraAdmin::Admin do
     end
   end
 end
+
