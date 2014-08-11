@@ -28,8 +28,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mongoid',         '~> 3.1.6'
   spec.add_dependency 'sinatra',         '~> 1.4.5'
   spec.add_dependency 'sinatra-contrib', '~> 1.4.2'
-  spec.add_dependency 'sinatra-flash'
+  spec.add_dependency 'sinatra-flash',   '~> 0.3.0'
   spec.add_dependency 'haml',            '~> 4.0.5'
+  spec.add_dependency 'warden',          '~> 1.2.3'
   spec.add_dependency 'activesupport'
-  spec.add_dependency 'warden'
+  spec.add_dependency 'bcrypt'
 end
