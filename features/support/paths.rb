@@ -14,6 +14,8 @@ module NavigationHelpers
       '/admin'
     when /the login page/
       '/admin/login'
+    when /my custom page/
+      '/admin/customs'
     when /users listing/
       '/admin/users'
     else

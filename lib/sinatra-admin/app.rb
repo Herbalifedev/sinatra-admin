@@ -5,18 +5,21 @@ require "sinatra/flash"
 require "warden"
 require "sinatra-admin/auth_strategies/admin"
 require "sinatra-admin/helpers/session"
+require "sinatra-admin/helpers/template_lookup"
 
 module SinatraAdmin
   class App < Sinatra::Base
     Mongoid.raise_not_found_error = false
     I18n.config.enforce_available_locales = false
 
-    enable :sessions
+    set :sessions, true
+    set :views, [views]
 
     register Sinatra::Namespace
     register Sinatra::Flash
 
     helpers SinatraAdmin::SessionHelper
+    helpers SinatraAdmin::TemplateLookupHelper
 
     use Rack::MethodOverride
     use Warden::Manager do |config|

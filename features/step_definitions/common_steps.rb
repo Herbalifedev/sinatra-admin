@@ -23,6 +23,20 @@ Given /^I register "(\w+)" resource$/ do |resource|
   SinatraAdmin.register resource
 end
 
+Given /^I add main app views to SinatraAdmin views$/ do
+  SinatraAdmin.add_views_from(Dummy)
+end
+
+Given /^I register my custom page$/ do
+  SinatraAdmin.register 'Custom' do
+    get '/?' do
+      @welcome_msg = 'Welcome to SinatraAdmin custom pages!'
+      @admin_count = SinatraAdmin::Admin.count
+      haml 'customs/index'.to_sym
+    end
+  end
+end
+
 Given /^I define "(\w+)" as root resource$/ do |resource|
   SinatraAdmin.root resource
 end
