@@ -1,4 +1,4 @@
-Warden::Strategies.add(:admin) do
+Warden::Strategies.add(:sinatra_admin) do
   def valid?
     email && password
   end

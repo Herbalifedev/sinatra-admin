@@ -3,7 +3,7 @@ Given /^I am an Admin$/ do
 end
 
 Given /^I am logged in as admin$/ do
-  login_as @admin, scope: :admin
+  login_as @admin, scope: :sinatra_admin
 end
 
 Given /^There are users$/ do

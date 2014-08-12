@@ -1,10 +1,10 @@
 require 'mongoid'
+require 'warden'
 require 'sinatra/base'
-require "sinatra/namespace"
-require "sinatra/flash"
-require "warden"
-require "sinatra-admin/auth_strategies/admin"
-require "sinatra-admin/helpers/session"
+require 'sinatra/namespace'
+require 'sinatra/flash'
+require 'sinatra-admin/warden_strategies/sinatra_admin'
+require 'sinatra-admin/helpers/session'
 require "sinatra-admin/helpers/template_lookup"
 
 module SinatraAdmin
@@ -22,11 +22,12 @@ module SinatraAdmin
     helpers SinatraAdmin::TemplateLookupHelper
 
     use Rack::MethodOverride
+
     use Warden::Manager do |config|
-      config.serialize_into_session(:admin){|admin| admin.id }
-      config.serialize_from_session(:admin){|id| SinatraAdmin.config.admin_model.find(id) }
-      config.scope_defaults :admin,
-        strategies: [:admin],
+      config.serialize_into_session(:sinatra_admin){|admin| admin.id }
+      config.serialize_from_session(:sinatra_admin){|id| SinatraAdmin.config.admin_model.find(id) }
+      config.scope_defaults :sinatra_admin,
+        strategies: [:sinatra_admin],
         action: '/admin/unauthenticated'
       config.failure_app = SinatraAdmin::App
     end
@@ -38,7 +39,9 @@ module SinatraAdmin
     namespace '/admin' do
       before do
         unless public_routes.include?(request.path_info)
+          puts "before filter! #{request.path_info}"
           authenticate!
+          puts "after filter! #{request.path_info}"
         end
       end
 
@@ -51,7 +54,7 @@ module SinatraAdmin
       end
 
       post '/login/?' do
-        if warden.authenticate(:admin, scope: :admin)
+        if warden.authenticate(:sinatra_admin, scope: :sinatra_admin)
           redirect to(SinatraAdmin.config.default_route)
         else
           flash.now[:error] = warden.message
