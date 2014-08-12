@@ -1,26 +1,15 @@
 require 'spec_helper'
 
-class Tag; end
-
 describe SinatraAdmin::Register do
-  describe '.add' do
-    before { SinatraAdmin.config.reset! }
+  it 'defines ::Base' do
+    expect(defined? described_class::Base).to eq('constant')
+  end
 
-    context 'when resource has been registered already' do
-      before { SinatraAdmin.register 'Tag' }
+  it 'defines ::Model' do
+    expect(defined? described_class::Model).to eq('constant')
+  end
 
-      it 'raises RegistrationException' do
-        expect{
-          SinatraAdmin.register 'Tag'
-        }.to raise_error(SinatraAdmin::RegistrationException, "The resource Tag is already registered")
-      end
-    end
-
-    context 'when resource has not been registered yet' do
-      it 'adds route to config' do
-        SinatraAdmin.register 'Tag'
-        expect(SinatraAdmin.config.routes).to include('tags')
-      end
-    end
+  it 'defines ::Custom' do
+    expect(defined? described_class::Custom).to eq('constant')
   end
 end
