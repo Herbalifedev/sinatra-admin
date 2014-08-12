@@ -20,7 +20,7 @@ Feature: Default root
     And I am an Admin
     And I am logged in as admin
     And I define "User" as root resource
-    When I go to the home page
+   When I go to the home page
     Then I should see "Users - Index"
     And I should see "_id"
     And I should see "first_name"

@@ -23,8 +23,13 @@ Given /^I register "(\w+)" resource$/ do |resource|
   SinatraAdmin.register resource
 end
 
-Given /^I add main app views to SinatraAdmin views$/ do
-  SinatraAdmin.add_views_from(Dummy)
+Given /^I register "(\w+)" resource with custom route$/ do |resource|
+  SinatraAdmin.register resource do
+    get '/custom/?' do
+      @message = "Welcome to Resource model custom page"
+      haml "users/custom".to_sym
+    end
+  end
 end
 
 Given /^I register my custom page$/ do
@@ -35,6 +40,10 @@ Given /^I register my custom page$/ do
       haml 'customs/index'.to_sym
     end
   end
+end
+
+Given /^I add main app views to SinatraAdmin views$/ do
+  SinatraAdmin.extend_views_from(Dummy)
 end
 
 Given /^I define "(\w+)" as root resource$/ do |resource|

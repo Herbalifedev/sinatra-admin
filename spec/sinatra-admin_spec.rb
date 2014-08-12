@@ -47,13 +47,13 @@ describe SinatraAdmin do
     end
   end
 
-  describe '.add_views_from' do
+  describe '.extend_views_from' do
     let(:expected_views) do
       described_class::App.views << "#{Dummy.views}/admin"
     end
 
     it 'adds main app views to SinatraAdmin views' do
-      described_class.add_views_from(Dummy)
+      described_class.extend_views_from(Dummy)
       expect(described_class::App.views).to eq(expected_views)
     end
   end
