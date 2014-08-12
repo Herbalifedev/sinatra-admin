@@ -11,7 +11,7 @@ module SinatraAdmin
     def register(constant_name, &block)
       begin
         model = constant_name.constantize
-        Register::Model.add(model)
+        Register::Model.add(model, &block)
       rescue NameError => error #Model does not exist
         Register::Custom.add(constant_name, &block)
       end
@@ -29,7 +29,7 @@ module SinatraAdmin
       config.admin_model = constant_name.constantize
     end
 
-    def add_views_from(main_app)
+    def extend_views_from(main_app)
       Array(main_app.views).each do |view|
         SinatraAdmin::App.views << "#{view}/admin"
       end

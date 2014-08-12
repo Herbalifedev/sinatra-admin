@@ -1,7 +1,8 @@
 module SinatraAdmin
   module Register
     class Model < Base
-      def generate!
+      def generate!(&block)
+        app.namespace("/admin/#{route}", &block) if block_given?
         app.instance_exec(resource_constant, route) do |model, route|
           namespace '/admin' do
             before "/#{route}/?*" do
@@ -11,7 +12,7 @@ module SinatraAdmin
 
             #INDEX
             get "/#{route}/?" do
-              @collection = model.all.entries
+              @collection ||= model.all.entries
               haml :index, format: :html5
             end
 
