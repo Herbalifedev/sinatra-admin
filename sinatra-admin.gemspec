@@ -6,7 +6,7 @@ require 'sinatra-admin/version'
 Gem::Specification.new do |spec|
   spec.name          = 'sinatra-admin'
   spec.version       = SinatraAdmin::VERSION
-  spec.authors       = ['Fco. Delgado']
+  spec.authors       = ['Fco. Delgado', 'Carlo Cajucom', 'Vahak Matavosian']
   spec.email         = ['franciscodelgadodev@gmail.com']
   spec.summary       = "Rack Middleware inpired in ActiveAdmin for Sinatra applications. Allow us to build an admin dashboard with a minimal effort."
   spec.homepage      = 'https://github.com/Herbalifedev/sinatra-admin'
