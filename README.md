@@ -1,6 +1,6 @@
 # SinatraAdmin
 
-Sinatra application that allow us to have an admin dashboard with the
+Sinatra application that allows us to have an admin dashboard with 
 minimal effort.
 
 ## Installation
@@ -45,7 +45,7 @@ namespace. This is how SinatraAdmin should be configured:
     ```
 
 3. Register model resources(let's assume that we have User and Comment
-   models). It created the 7 REST actions to /create/update/remove
+   models). It creates the 7 REST actions to /create/update/remove
    records.
     ```ruby
     class MyApp::Admin
@@ -57,9 +57,8 @@ namespace. This is how SinatraAdmin should be configured:
 4. Define your root resource(optional). This is going to be the first
    page where the application is going to redirect you after the login.
    SinatraAdmin defines the first registered resource as the default root. 
-   In this case it will get 'User'(according to pint number 3). Anyway, 
-   if you want to set a different resource as the default one you can 
-   do it.
+   In this case it will get 'User'(according to point number 3). If you
+   want, you can set a different resource as the default one.
     ```ruby
     class MyApp::Admin
       SinatraAdmin.root 'Comment'
@@ -69,7 +68,7 @@ namespace. This is how SinatraAdmin should be configured:
 5. Define your custom resources. Having model resources sometimes is not
    enough and we might want to see some stats about our application. An
    example could be: "As an admin I want to see how many user accounts has
-   been registered". Let's take a look how to define custom resources.
+   been registered". Let's take a look at how to define custom resources.
     ```ruby
     class MyApp::Admin
       SinatraAdmin.register 'Stats' do
@@ -85,15 +84,17 @@ namespace. This is how SinatraAdmin should be configured:
    saying something like: "Errno::ENOENT at /admin/stats No such file or
    directory - /path/to/the/gem/sinatra-admin/views/stats/index.haml"
    It's because SinatraAdmin tries to find the template in the views
-   folder of sinatra-admin. Obviously that custom template does not exist in the gem.
-   SinatraAdmin has a method to extend the views path and it allows us to
-   find the template that we are looking for. It takes us to the next
-   point.
+   folder of sinatra-admin. Obviously, that custom template does not exist 
+   in the gem. SinatraAdmin has a method to extend the views path and it 
+   allows us to find the template that we are looking for. This takes us to 
+   the next point.
 
 6. Extend your views path(Only for custom resources). SinatraAdmin has
    the method :extend_views_from. This method receives a value that
-   should be either a String instance with the path to views folder or a Sinatra application.
-   SinatraAdmin expects to be mounted over an "admin" namespace, that's why it's going to look the view in: the/extented/path/admin
+   should either be a String instance with the path to views folder or
+   be a Sinatra application. SinatraAdmin expects to be mounted over an 
+   "admin" namespace, that's why it's going to look the view in: 
+   the/extented/path/admin
     ```ruby
     class MyApp::Admin
       SinatraAdmin.extend_views_from(MyApp::API) #It'll look at path/to/my_app/api/views/admin/stats/index.haml
@@ -140,12 +141,12 @@ namespace. This is how SinatraAdmin should be configured:
 * SinatraAdmin only works if you mount it over "admin" namespace like in
 the example(Point 8).
 
-* Even when you can pass a block with get/post/put/patch/delete when you
-register a model resource(like User) SinatraAdmin does not have any way to access
+* Even when you pass a block with get/post/put/patch/delete when you
+register a model resource(like User), SinatraAdmin does not have a way to access
 them(only the URL). This is a TODO feature.
 
-* Even when you can pass a block with post/put/patch/delete when you
-register a custom resource(Like MyStats) SinatraAdmin does not have any way to
+* Even when you pass a block with post/put/patch/delete when you
+register a custom resource(Like MyStats), SinatraAdmin does not have a way to
 access them(only the URL). This is a TODO feature.
 
 ## Notes
@@ -159,7 +160,10 @@ SinatraAdmin::Admin. It has :first_name, :last_name, :email and
 :password fields. Password is encrypted and stored in :password_hash
 field. :email and :password are required fields and :email should have a correct format.
 
-* You can contribute to this Project. Contributing means not only adding features but also writing documentation, adding issues, refactoring code or jut sending us either a <3 if you liked the project or a </3 if you do not like it ;)
+* You can contribute to this Project. Contributing means not only adding
+features but also writing documentation, adding issues, refactoring code
+or just sending us either a <3 if you liked the project or a </3 if you
+did not like it ;)
 
 * Current version: 0.1.0
 
