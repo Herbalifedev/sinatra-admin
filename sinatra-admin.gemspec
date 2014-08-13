@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = SinatraAdmin::VERSION
   spec.authors       = ['Fco. Delgado', 'Carlo Cajucom', 'Vahak Matavosian']
   spec.email         = ['franciscodelgadodev@gmail.com']
-  spec.summary       = "Rack Middleware inpired in ActiveAdmin for Sinatra applications. Allow us to build an admin dashboard with a minimal effort."
+  spec.summary       = "Sinatra application that allow us to have an admin dashboard with minimal effort."
   spec.homepage      = 'https://github.com/Herbalifedev/sinatra-admin'
   spec.license       = 'MIT'
 
