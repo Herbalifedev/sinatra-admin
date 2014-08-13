@@ -11,11 +11,9 @@ module SinatraAdmin
     end
 
     def authenticate!
-      puts warden.inspect
       unless warden.authenticated?(:sinatra_admin)
-        puts "in filter - not authenticated! #{request.path_info}"
         flash[:error] = "You must log in"
-        redirect '/admin/login'
+        redirect to('login')
       end
     end
 

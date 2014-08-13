@@ -19,7 +19,7 @@
             - @model.attribute_names.each do |attr|
               - if attr.eql?('_id')
                 %td
-                  %a{href: "/admin/#{@route}/#{record.send(attr)}"}
+                  %a{href: "#{@route}/#{record.send(attr)}"}
                     = record.send(attr)
               - else
                 %td

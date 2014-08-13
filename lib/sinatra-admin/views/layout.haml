@@ -10,7 +10,7 @@
         %ul{style: "list-style-type:none;"}
           - SinatraAdmin.config.routes.each do |route|
             %li{style: "float:left; padding-right:15px;"}
-              %a{href: "/admin/#{route}"}= route.humanize
+              %a{href: "#{route}"}= route.humanize
 
       .logout{style: "float:right;"}
         %a{href: "/admin/logout"} Logout
