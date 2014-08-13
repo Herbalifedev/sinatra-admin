@@ -161,7 +161,7 @@ field. :email and :password are required fields and :email should have a correct
 
 * You can contribute to this Project. Contributing means not only adding features but also writing documentation, adding issues, refactoring code or jut sending us either a <3 if you liked the project or a </3 if you do not like it ;)
 
-* Current version: 0.0.1
+* Current version: 0.1.0
 
 ## Contributing
 
