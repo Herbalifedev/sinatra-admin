@@ -5,7 +5,7 @@ require 'capybara'
 require 'capybara/cucumber'
 require 'rspec'
 
-Capybara.app = Dummy
+Capybara.app = Rack::Builder.parse_file('./dummy/config.ru').first
 
 class DummyWorld
   include Capybara::DSL

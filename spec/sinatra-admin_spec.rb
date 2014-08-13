@@ -48,13 +48,26 @@ describe SinatraAdmin do
   end
 
   describe '.extend_views_from' do
-    let(:expected_views) do
-      described_class::App.views << "#{Dummy.views}/admin"
+    context 'when target is a string' do
+      let(:expected_views) do
+        described_class::App.views << "path/to/admin/views/admin"
+      end
+
+      it 'adds main app views to SinatraAdmin views' do
+        described_class.extend_views_from("path/to/admin/views")
+        expect(described_class::App.views).to eq(expected_views)
+      end
     end
 
-    it 'adds main app views to SinatraAdmin views' do
-      described_class.extend_views_from(Dummy)
-      expect(described_class::App.views).to eq(expected_views)
+    context 'when target is a constant' do
+      let(:expected_views) do
+        described_class::App.views << "#{Dummy::API.views}/admin"
+      end
+
+      it 'adds main app views to SinatraAdmin views' do
+        described_class.extend_views_from(Dummy::API)
+        expect(described_class::App.views).to eq(expected_views)
+      end
     end
   end
 end

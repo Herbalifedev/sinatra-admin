@@ -3,7 +3,7 @@ Given /^I am an Admin$/ do
 end
 
 Given /^I am logged in as admin$/ do
-  login_as @admin, scope: :admin
+  login_as @admin, scope: :sinatra_admin
 end
 
 Given /^There are users$/ do
@@ -16,7 +16,7 @@ Given /^There are not users$/ do
 end
 
 Given /^I add SinatraAdmin as middleware$/ do
-  Dummy.use SinatraAdmin::App
+  Dummy::Admin.use SinatraAdmin::App
 end
 
 Given /^I register "(\w+)" resource$/ do |resource|
@@ -43,7 +43,7 @@ Given /^I register my custom page$/ do
 end
 
 Given /^I add main app views to SinatraAdmin views$/ do
-  SinatraAdmin.extend_views_from(Dummy)
+  SinatraAdmin.extend_views_from(Dummy::API)
 end
 
 Given /^I define "(\w+)" as root resource$/ do |resource|
