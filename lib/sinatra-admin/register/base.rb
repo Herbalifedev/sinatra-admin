@@ -3,7 +3,7 @@ module SinatraAdmin
     class Base
       class << self
         def add(resource_constant, &block)
-          route = resource_constant.to_s.downcase.split.join('_').pluralize
+          route = resource_constant.to_s.split(/\s|\::/).join('_').underscore.pluralize
           if SinatraAdmin.config.routes.include?(route)
             raise RegistrationException, "The resource #{resource_constant.to_s} is already registered"
           else
