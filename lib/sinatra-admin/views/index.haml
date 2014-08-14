@@ -1,34 +1,39 @@
-.header
-  %h1="#{@model.to_s.pluralize} - Index"
+.row-fluid
+  .span12
+    %h2="#{@model.to_s.pluralize} - Index"
 
-.actions
-  %ul
-    %li
-      %a{href: "/admin/#{@route}/new"} New
+.row-fluid
+  .span12
+    %ul.nav.nav-pills
+      %li.disabled
+        %a{href: "#"} Options
+      %li
+        %a{href: "/admin/#{@route}/new"} New
 
-.content
-  %table
-    %thead
-      %tr
-        - @model.attribute_names.each do |attr|
-          %th= attr
-    %tbody
-      - if @collection.any?
-        - @collection.each do |record|
-          %tr
-            - @model.attribute_names.each do |attr|
-              - if attr.eql?('_id')
-                %td
-                  %a{href: "#{@route}/#{record.send(attr)}"}
-                    = record.send(attr)
-              - else
-                %td
-                  = record.send(attr)
-            %td
-              %form{method: 'post', action: "/admin/#{@route}/#{record.id}"}
-                %input{name: "_method", type: "hidden", value: "delete"}
-                %button{type: "submit", id: "delete_#{record.id}"} Delete
-      - else
+.row-fluid
+  .span12
+    %table.table.table-hover.table-condensed
+      %thead
         %tr
-          %td{colspan: "#{@model.attribute_names.size}"}
-            %h5 There are not records in the database
+          - @model.attribute_names.each do |attr|
+            %th= attr
+      %tbody
+        - if @collection.any?
+          - @collection.each do |record|
+            %tr
+              - @model.attribute_names.each do |attr|
+                - if attr.eql?('_id')
+                  %td
+                    %a{href: "/admin/#{@route}/#{record.send(attr)}"}
+                      = record.send(attr)
+                - else
+                  %td
+                    = record.send(attr)
+              %td
+                %form{method: 'post', action: "/admin/#{@route}/#{record.id}", style: "margin: 0"}
+                  %input{name: "_method", type: "hidden", value: "delete"}
+                  %button.btn-link{type: "submit", id: "delete_#{record.id}"} Delete
+        - else
+          %tr
+            %td{colspan: "#{@model.attribute_names.size}"}
+              %h5 There are not records in the database
