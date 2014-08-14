@@ -1,21 +1,23 @@
-.header
-  %h1="#{@model.to_s} - Edit"
+.row-fluid
+  .span12
+    %h2="#{@model.to_s} - Edit"
 
-.actions
-  %ul
-    %li
-      %a{href: "/admin/#{@route}"} Index
+.row-fluid
+  .span12
+    %ul.nav.nav-pills
+      %li.disabled
+        %a{href: "#"} Options
+      %li
+        %a{href: "/admin/#{@route}"} Index
 
-.content
-  %div
+.row-fluid
+  .span12
     %form{method: 'post', action: "/admin/#{@route}/#{@resource.id}"}
       %fieldset
-        %div
-          %input{name: "_method", type: "hidden", value: "put"}
+        %legend Please fill out the fields
+        %input{name: "_method", type: "hidden", value: "put"}
         - (@model.attribute_names - @model.protected_attributes.to_a).each do |attr|
-          %div
-            %label{for: "#{attr}"}= attr
-            %input{id: "#{attr}", type: "text", value: "#{@resource[attr]}", name: "data[#{attr}]"}
-            %span= @resource.errors[attr] if @resource.errors[attr].any?
-        %div
-          %button{type: "submit", id: "update"} Update
+          %label{for: "#{attr}"}= attr
+          %input{id: "#{attr}", type: "text", value: "#{@resource[attr]}", name: "data[#{attr}]"}
+          %span= @resource.errors[attr] if @resource.errors[attr].any?
+      %button.btn.btn-primary{type: "submit", id: "update"} Update

@@ -1,19 +1,36 @@
 !!!
-%html
-  %head>
+%html{lang: "en-US"}
+  %head
     %meta{charset: 'UTF=8'}
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
+    %link{href: "/admin/css/bootstrap.min.css", rel: "stylesheet"}
+    %style
+      body { padding-top: 60px; }
+    %link{href: "/admin/css/bootstrap-responsive.min.css", rel: "stylesheet"}
     %title Sinatra Admin
 
   %body
-    .top-bar{style: "height:30px;"}
-      .main-menu
-        %ul{style: "list-style-type:none;"}
-          - SinatraAdmin.config.routes.each do |route|
-            %li{style: "float:left; padding-right:15px;"}
-              %a{href: "#{route}"}= route.humanize
+    .navbar.navbar-fixed-top.navbar-inverse
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar{data: {toggle: "collapse", target: ".nav-collapse"}}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+              %a.brand{href: "/admin"}
+                SinatraAdmin
+                %small.muted{style: "font-size: 12px"}= " v#{SinatraAdmin::VERSION}"
+          .nav-collapse.collapse
+            %ul.nav
+              - SinatraAdmin.config.routes.each do |route|
+                %li
+                  %a{href: "#{route}"}= route.humanize
+            %ul.nav.pull-right
+              %li
+                %a{href: "/admin/logout"} Logout
 
-      .logout{style: "float:right;"}
-        %a{href: "/admin/logout"} Logout
-
-    .wrapper
+    .container
       =yield
+
+    %script{src: "/admin/js/jquery-2.1.1.min.js"}
+    %script{src: "/admin/js/bootstrap.min.js"}

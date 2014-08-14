@@ -9,7 +9,7 @@ Feature: Custom Pages
     And I register my custom page
     And I am an Admin
     When I go to my custom page
-    Then I should see "Login - SinatraAdmin"
+    Then I should see "Sign in SinatraAdmin"
     And I should see "You must log in"
 
   Scenario: Admin sees custom page
