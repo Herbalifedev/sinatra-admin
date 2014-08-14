@@ -10,5 +10,5 @@ Feature: Admin login
     And I am logged in as admin
     And I am on the home page
     When I follow "Logout"
-    Then I should see "Login - SinatraAdmin"
+    Then I should see "Sign in SinatraAdmin"
     Then I should see "Successfully logged out"

@@ -21,7 +21,7 @@ Feature: Admin login
     When I fill in "email" with "invalidemail@mail.com"
     And I fill in "password" with "admin"
     And I press "Login"
-    Then I should see "Login - SinatraAdmin"
+    Then I should see "Sign in SinatraAdmin"
     Then I should see "The email you entered does not exist"
 
   Scenario: Admin is not able to login with invalid password
@@ -32,5 +32,5 @@ Feature: Admin login
     When I fill in "email" with "admin@mail.com"
     And I fill in "password" with "invalid_password"
     And I press "Login"
-    Then I should see "Login - SinatraAdmin"
+    Then I should see "Sign in SinatraAdmin"
     Then I should see "You entered an incorrect password"

@@ -17,7 +17,9 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand{href: "/admin"}= "SinatraAdmin #{SinatraAdmin::VERSION}"
+              %a.brand{href: "/admin"}
+                SinatraAdmin
+                %small.muted{style: "font-size: 12px"}= " v#{SinatraAdmin::VERSION}"
           .nav-collapse.collapse
             %ul.nav
               - SinatraAdmin.config.routes.each do |route|

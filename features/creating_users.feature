@@ -8,7 +8,7 @@ Feature: Creating Users
     And I register "User" resource
     And I am an Admin
     When I go to users listing
-    Then I should see "Login - SinatraAdmin"
+    Then I should see "Sign in SinatraAdmin"
     And I should see "You must log in"
 
   Scenario: Admin creates user

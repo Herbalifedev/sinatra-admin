@@ -10,7 +10,7 @@ Feature: Default root
     And I am an Admin
     And I define "User" as root resource
     When I go to the home page
-    Then I should see "Login - SinatraAdmin"
+    Then I should see "Sign in SinatraAdmin"
     And I should see "You must log in"
 
   Scenario: Admin is redirected to defined root resource when it's defined

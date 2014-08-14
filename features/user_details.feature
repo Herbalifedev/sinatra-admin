@@ -10,7 +10,7 @@ Feature: User show
     And I am an Admin
     And There are users
     When I go to users listing
-    Then I should see "Login - SinatraAdmin"
+    Then I should see "Sign in SinatraAdmin"
     And I should see "You must log in"
 
   Scenario: Admin sees user details when clicks the _id link
