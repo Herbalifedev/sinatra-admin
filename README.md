@@ -24,7 +24,16 @@ Or install it yourself as:
 By default SinatraAdmin assumes that it's mounted over an "admin"
 namespace. This is how SinatraAdmin should be configured:
 
-1. Define your project namespace and your Sinatra applications.
+1. Set ENV['SINATRA_ADMIN_SECRET']. This secret key is used by
+   Rack::Session::Cookie to encrypt your cookies. Warden needs this
+   session secret key to keep the user sessions. If you do not set
+   this value you're going to see a security warning.
+
+    ```ruby
+    $ export SINATRA_ADMIN_SECRET="my_secret_key"
+    ```
+
+2. Define your project namespace and your Sinatra applications.
     ```ruby
     module MyApp
       class API < Sinatra::Base
@@ -37,14 +46,14 @@ namespace. This is how SinatraAdmin should be configured:
     end
     ```
 
-2. Add SinatraAdmin::App middleware to your admin application.
+3. Add SinatraAdmin::App middleware to your admin application.
     ```ruby
     class MyApp::Admin
       use SinatraAdmin::App
     end
     ```
 
-3. Register model resources(let's assume that we have User and Comment
+4. Register model resources(let's assume that we have User and Comment
    models). It creates the 7 REST actions to /create/update/remove
    records.
     ```ruby
@@ -54,7 +63,7 @@ namespace. This is how SinatraAdmin should be configured:
     end
     ```
 
-4. Define your root resource(optional). This is going to be the first
+5. Define your root resource(optional). This is going to be the first
    page where the application is going to redirect you after the login.
    SinatraAdmin defines the first registered resource as the default root. 
    In this case it will get 'User'(according to point number 3). If you
@@ -65,7 +74,7 @@ namespace. This is how SinatraAdmin should be configured:
     end
     ```
 
-5. Define your custom resources. Having model resources sometimes is not
+6. Define your custom resources. Having model resources sometimes is not
    enough and we might want to see some stats about our application. An
    example could be: "As an admin I want to see how many user accounts has
    been registered". Let's take a look at how to define custom resources.
@@ -89,7 +98,7 @@ namespace. This is how SinatraAdmin should be configured:
    allows us to find the template that we are looking for. This takes us to 
    the next point.
 
-6. Extend your views path(Only for custom resources). SinatraAdmin has
+7. Extend your views path(Only for custom resources). SinatraAdmin has
    the method :extend_views_from. This method receives a value that
    should either be a String instance with the path to views folder or
    be a Sinatra application. SinatraAdmin expects to be mounted over an 
@@ -102,7 +111,7 @@ namespace. This is how SinatraAdmin should be configured:
     end
     ```
 
-7. Wrapping it up.
+8. Wrapping it up.
     ```ruby
     class MyApp::Admin < Sinatra::Base
       use SinatraAmin::App
@@ -121,7 +130,7 @@ namespace. This is how SinatraAdmin should be configured:
     end
     ```
 
-8. Run it. We assume you're using a config.ru file to run your Sinatra
+9. Run it. We assume you're using a config.ru file to run your Sinatra
    application. This is how it should look like:
     ```ruby
     require 'path/to/my_app/api'
@@ -165,7 +174,7 @@ features but also writing documentation, adding issues, refactoring code
 or just sending us either a <3 if you liked the project or a </3 if you
 did not like it ;)
 
-* Current version: 0.1.0
+* Current version: 0.1.1
 
 ## Contributing
 
