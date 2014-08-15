@@ -163,8 +163,10 @@ access them(only the URL). This is a TODO feature.
 * SinatraAdmin uses Mongoid by default. TODO: Add activeRecord support.
  
 * SinatraAdmin uses Warden for authentication.
-* 
+
 * SinatraAdmin uses Bootstrap(2.3.2) and Jquery(2.1.1).
+
+* SinatraAdmin uses Bootstrap Datepicker. More info http://www.eyecon.ro/bootstrap-datepicker/
 
 * SinatraAdmin comes with an Admin model by default. The constant is
 SinatraAdmin::Admin. It has :first_name, :last_name, :email and

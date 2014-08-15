@@ -29,8 +29,9 @@
               %li
                 %a{href: "/admin/logout"} Logout
 
-    .container
-      =yield
-
     %script{src: "/admin/js/jquery-2.1.1.min.js"}
     %script{src: "/admin/js/bootstrap.min.js"}
+    %script{src: "/admin/js/bootstrap-datepicker.js"}
+
+    .container
+      =yield
