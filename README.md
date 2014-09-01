@@ -1,4 +1,4 @@
-# SinatraAdmin
+# SinatraAdmin [![Build Status](https://travis-ci.org/Herbalifedev/sinatra-admin.svg?branch=master)](https://travis-ci.org/Herbalifedev/sinatra-admin) 
 
 Sinatra application that allows us to have an admin dashboard with 
 minimal effort.
