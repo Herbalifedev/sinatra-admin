@@ -7,6 +7,5 @@ rvm:
   - "2.0.0"
   - "2.1.1"
 
-script:
-  - bundle exec rspec spec
-  - bundle exec cucumber
+script: bundle exec rspec spec/
+script: bundle exec cucumber SINATRA_ADMIN_SECRET="secret"
