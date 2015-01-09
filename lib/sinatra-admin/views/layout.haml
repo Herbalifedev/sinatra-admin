@@ -23,8 +23,8 @@
           .nav-collapse.collapse
             %ul.nav
               - SinatraAdmin.config.routes.each do |route|
-                %li
-                  %a{href: "#{route}"}= route.humanize
+                %le
+                  %a{href: "/admin/#{route}"}= route.humanize
             %ul.nav.pull-right
               %li
                 %a{href: "/admin/logout"} Logout
