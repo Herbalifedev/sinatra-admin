@@ -65,7 +65,6 @@ module SinatraAdmin
       redirect '/admin/login'
     end
 
-
     post '/unauthenticated/?' do
       flash[:error] = warden.message || "You must log in"
       redirect '/admin/login'

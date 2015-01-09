@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'capybara', '~> 2.4.1'
   spec.add_development_dependency 'cucumber', '~> 1.3.16'
   spec.add_development_dependency 'cucumber-sinatra', '~> 0.5.0'
-  spec.add_development_dependency 'database_cleaner'
+  spec.add_development_dependency 'database_cleaner', '1.3.0'
 
   spec.add_dependency 'mongoid',         '~> 3.1.6'
   spec.add_dependency 'sinatra',         '~> 1.4.5'
