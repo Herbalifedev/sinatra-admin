@@ -11,7 +11,15 @@ module SinatraAdmin
 
           #INDEX
           get "/#{route}/?" do
-            @collection ||= model.all.entries
+            if params[:sort]
+              if params[:asc] == 'false'
+                @collection ||= model.all.desc(params[:sort]).entries
+              else
+                @collection ||= model.all.asc(params[:sort]).entries
+              end
+            else 
+              @collection ||= model.all.entries
+            end
             haml :index, format: :html5
           end
 

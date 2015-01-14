@@ -16,7 +16,11 @@
       %thead
         %tr
           - @model.attribute_names.each do |attr|
-            %th= attr
+            %th
+              %a{href: "/admin/#{@route}?sort=#{attr}&asc=#{params[:asc]=='false'}"} 
+                = attr
+                = params[:sort] == attr ? (params[:asc] == 'true' ? '&uarr;' : '&darr;' )  : ''
+                 
       %tbody
         - if @collection.any?
           - @collection.each do |record|
