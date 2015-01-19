@@ -13,13 +13,15 @@ module SinatraAdmin
           get "/#{route}/?" do
             if params[:sort]
               if params[:asc] == 'false'
-                @collection ||= model.all.desc(params[:sort]).entries
+                @collection ||= model.all.desc(params[:sort])
               else
-                @collection ||= model.all.asc(params[:sort]).entries
+                @collection ||= model.all.asc(params[:sort])
               end
-            else 
-              @collection ||= model.all.entries
+            else
+              @collection ||= model.all
             end
+            @collection = @collection.page(params[:page] || 1)
+
             haml :index, format: :html5
           end
 
