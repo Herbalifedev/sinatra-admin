@@ -4,3 +4,10 @@ test:
       database: dummy_test
       hosts:
         - localhost:27017
+
+development:
+  sessions:
+    default:
+      database: dummy_development
+      hosts:
+        - localhost:27017

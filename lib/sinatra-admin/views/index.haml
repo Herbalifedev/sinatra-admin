@@ -20,7 +20,7 @@
               %a{href: "/admin/#{@route}?sort=#{attr}&asc=#{params[:asc]=='false'}"} 
                 = attr
                 = params[:sort] == attr ? (params[:asc] == 'true' ? '&uarr;' : '&darr;' )  : ''
-                 
+
       %tbody
         - if @collection.any?
           - @collection.each do |record|
@@ -41,3 +41,6 @@
           %tr
             %td{colspan: "#{@model.attribute_names.size}"}
               %h5 There are not records in the database
+.row-fluid
+  .span12
+    = will_paginate @collection

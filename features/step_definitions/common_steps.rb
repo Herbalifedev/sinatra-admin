@@ -9,6 +9,7 @@ end
 Given /^There are users$/ do
   @carlo = User.create(first_name: "Carlo", last_name: "Cajucom", email: "carlo@herbalife.com")
   @fco = User.create(first_name: "Francisco", last_name: "Delgado", email: "francisco@herbalife.com")
+  @vahak = User.create(first_name: "Vahak", last_name: "Matavosian", email: "vahak@herbalife.com")
 end
 
 Given /^There are not users$/ do
@@ -21,6 +22,10 @@ end
 
 Given /^I register "(\w+)" resource$/ do |resource|
   SinatraAdmin.register resource
+end
+
+Given /^I set (\d+) items per page$/ do |per_page|
+  WillPaginate.per_page = per_page.to_i
 end
 
 Given /^I register "(\w+)" resource with custom route$/ do |resource|
