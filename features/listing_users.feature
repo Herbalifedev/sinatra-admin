@@ -33,6 +33,8 @@ Feature: Users listing
     And I should see "Vahak"
     And I should see "Matavosian"
     And I should see "vahak@herbalife.com"
+    And I should see "Export all"
+    And I should see "Export current page"
 
   Scenario: Admin sees "No records" message when there are not users
     Given I add SinatraAdmin as middleware

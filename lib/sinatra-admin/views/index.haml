@@ -9,6 +9,10 @@
         %a{href: "#"} Options
       %li
         %a{href: "/admin/#{@route}/new"} New
+      %li
+        %a{href: "/admin/#{@route}/export/all?sort=#{params[:sort]}&asc=#{params[:asc]}"} Export all
+      %li
+        %a{href: "/admin/#{@route}/export/page?page=#{params[:page] || 1}&sort=#{params[:sort]}&asc=#{params[:asc]}"} Export current page
 
 .row-fluid
   .span12

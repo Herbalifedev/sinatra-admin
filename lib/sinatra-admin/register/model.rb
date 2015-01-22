@@ -1,3 +1,5 @@
+require 'csv'
+
 module SinatraAdmin
   module Register
     class Model < Base
@@ -23,6 +25,64 @@ module SinatraAdmin
             @collection = @collection.page(params[:page] || 1)
 
             haml :index, format: :html5
+          end
+
+          #EXPORT ALL
+          get "/#{route}/export/all/?" do
+            if params[:sort]
+              if params[:asc] == 'false'
+                @collection ||= model.all.desc(params[:sort])
+              else
+                @collection ||= model.all.asc(params[:sort])
+              end
+            else
+              @collection ||= model.all
+            end
+
+            content_type 'application/csv'
+            attachment "#{route}-all-#{Date.today.to_s}.csv"
+
+            CSV.generate do |csv|
+              csv << model.attribute_names
+              
+              @collection.each do |item|
+                row = []
+                model.attribute_names.each do |col|
+                  row << item[col]
+                end
+                csv << row
+              end
+            end
+          end
+
+          #EXPORT CURRENT PAGE
+          get "/#{route}/export/page/?" do
+            if params[:sort]
+              if params[:asc] == 'false'
+                @collection ||= model.all.desc(params[:sort])
+              else
+                @collection ||= model.all.asc(params[:sort])
+              end
+            else
+              @collection ||= model.all
+            end
+            @collection = @collection.page(params[:page] || 1)
+
+            content_type 'application/csv'
+            attachment "#{route}-page-#{Date.today.to_s}.csv"
+
+            CSV.generate do |csv|
+              csv << model.attribute_names
+              
+              @collection.each do |item|
+                row = []
+                model.attribute_names.each do |col|
+                  row << item[col]
+                end
+                csv << row
+              end
+            end
+
           end
 
           #NEW
