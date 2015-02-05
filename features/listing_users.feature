@@ -35,6 +35,12 @@ Feature: Users listing
     And I should see "vahak@herbalife.com"
     And I should see "Export all"
     And I should see "Export current page"
+    And the "_id" link should be "/admin/users?sort=_id&asc=false&page=1"
+    And the "first_name" link should be "/admin/users?sort=first_name&asc=false&page=1"
+    And the "last_name" link should be "/admin/users?sort=last_name&asc=false&page=1"
+    And the "email" link should be "/admin/users?sort=email&asc=false&page=1"
+    And the "Export all" link should be "/admin/users/export/all?sort=&asc="
+    And the "Export current page" link should be "/admin/users/export/page?page=1&sort=&asc="
 
   Scenario: Admin sees "No records" message when there are not users
     Given I add SinatraAdmin as middleware

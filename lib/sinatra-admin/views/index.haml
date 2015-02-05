@@ -21,7 +21,7 @@
         %tr
           - @model.attribute_names.each do |attr|
             %th
-              %a{href: "/admin/#{@route}?sort=#{attr}&asc=#{params[:asc]=='false'}"} 
+              %a{href: "/admin/#{@route}?sort=#{attr}&asc=#{params[:asc]=='false'}&page=#{params[:page] || 1}"} 
                 = attr
                 = params[:sort] == attr ? (params[:asc] == 'true' ? '&uarr;' : '&darr;' )  : ''
 
