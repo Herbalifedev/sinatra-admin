@@ -185,6 +185,13 @@ Then /^the "([^\"]*)" checkbox(?: within "([^\"]*)")? should not be checked$/ do
   end
 end
 
+Then /^the "([^\"]*)" link(?: within "([^\"]*)")? should be "([^\"]*)"$/ do |label, selector, link|
+  with_scope(selector) do
+    href = find_link(label)['href']
+    href.should == link
+  end
+end
+
 Then /^(?:|I )should be on (.+)$/ do |page_name|
   current_path = URI.parse(current_url).path
   if current_path.respond_to? :should

@@ -13,7 +13,7 @@ module SinatraAdmin
 
           #INDEX
           get "/#{route}/?" do
-            if params[:sort]
+            unless params[:sort].blank?
               if params[:asc] == 'false'
                 @collection ||= model.all.desc(params[:sort])
               else
@@ -29,7 +29,7 @@ module SinatraAdmin
 
           #EXPORT ALL
           get "/#{route}/export/all/?" do
-            if params[:sort]
+            unless params[:sort].blank?
               if params[:asc] == 'false'
                 @collection ||= model.all.desc(params[:sort])
               else
@@ -57,7 +57,7 @@ module SinatraAdmin
 
           #EXPORT CURRENT PAGE
           get "/#{route}/export/page/?" do
-            if params[:sort]
+            unless params[:sort].blank?
               if params[:asc] == 'false'
                 @collection ||= model.all.desc(params[:sort])
               else
