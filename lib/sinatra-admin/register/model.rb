@@ -1,5 +1,3 @@
-require 'csv'
-
 module SinatraAdmin
   module Register
     class Model < Base
@@ -13,76 +11,27 @@ module SinatraAdmin
 
           #INDEX
           get "/#{route}/?" do
-            unless params[:sort].blank?
-              if params[:asc] == 'false'
-                @collection ||= model.all.desc(params[:sort])
-              else
-                @collection ||= model.all.asc(params[:sort])
-              end
-            else
-              @collection ||= model.all
-            end
-            @collection = @collection.page(params[:page] || 1)
-
+            sort_attr, sort_by = params[:sort].blank? ? %w(created_at desc) : params[:sort].split(" ")
+            @collection = model.send(sort_by, sort_attr).page(params[:page] || 1)
             haml :index, format: :html5
           end
 
           #EXPORT ALL
           get "/#{route}/export/all/?" do
-            unless params[:sort].blank?
-              if params[:asc] == 'false'
-                @collection ||= model.all.desc(params[:sort])
-              else
-                @collection ||= model.all.asc(params[:sort])
-              end
-            else
-              @collection ||= model.all
-            end
-
+            sort_attr, sort_by = params[:sort].blank? ? %w(created_at desc) : params[:sort].split(" ")
+            @collection = model.send(sort_by, sort_attr)
             content_type 'application/csv'
             attachment "#{route}-all-#{Date.today.to_s}.csv"
-
-            CSV.generate do |csv|
-              csv << model.attribute_names
-              
-              @collection.each do |item|
-                row = []
-                model.attribute_names.each do |col|
-                  row << item[col]
-                end
-                csv << row
-              end
-            end
+            Presenters::CsvGenerator.new(@collection, model.attribute_names).export_csv
           end
 
           #EXPORT CURRENT PAGE
           get "/#{route}/export/page/?" do
-            unless params[:sort].blank?
-              if params[:asc] == 'false'
-                @collection ||= model.all.desc(params[:sort])
-              else
-                @collection ||= model.all.asc(params[:sort])
-              end
-            else
-              @collection ||= model.all
-            end
-            @collection = @collection.page(params[:page] || 1)
-
+            sort_attr, sort_by = params[:sort].blank? ? %w(created_at desc) : params[:sort].split(" ")
+            @collection = model.send(sort_by, sort_attr).page(params[:page] || 1)
             content_type 'application/csv'
             attachment "#{route}-page-#{Date.today.to_s}.csv"
-
-            CSV.generate do |csv|
-              csv << model.attribute_names
-              
-              @collection.each do |item|
-                row = []
-                model.attribute_names.each do |col|
-                  row << item[col]
-                end
-                csv << row
-              end
-            end
-
+            Presenters::CsvGenerator.new(@collection, model.attribute_names).export_csv
           end
 
           #NEW
