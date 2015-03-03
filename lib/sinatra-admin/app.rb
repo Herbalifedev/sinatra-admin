@@ -8,6 +8,8 @@ require 'sinatra-admin/helpers/session'
 require "sinatra-admin/helpers/template_lookup"
 require 'will_paginate_mongoid'
 require "will_paginate/view_helpers/sinatra"
+require "sinatra-admin/helpers/sortable_params"
+require "sinatra-admin/presenters/csv_generator"
 
 module SinatraAdmin
   class App < Sinatra::Base
@@ -23,6 +25,7 @@ module SinatraAdmin
 
     helpers SinatraAdmin::SessionHelper
     helpers SinatraAdmin::TemplateLookupHelper
+    helpers SinatraAdmin::SortableParams
     helpers WillPaginate::Sinatra::Helpers
 
     use Rack::MethodOverride
