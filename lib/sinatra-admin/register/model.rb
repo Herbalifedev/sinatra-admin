@@ -12,6 +12,8 @@ module SinatraAdmin
           #INDEX
           get "/#{route}/?" do
             sort_attr, sort_by = params[:sort].blank? ? %w(created_at desc) : params[:sort].split(" ")
+            p '==================================='
+            p "Sort-attr: #{sort_attr}, Sort-by: #{sort_by}"
             @collection = model.send(sort_by, sort_attr).page(params[:page] || 1)
             p '-----------------------------------'
             p @collection.each {|a| p "Firstname: #{a.first_name}, Email: #{a.email}"}
