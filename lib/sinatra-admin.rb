@@ -5,6 +5,7 @@ require 'sinatra-admin/app'
 require 'sinatra-admin/register'
 require 'sinatra-admin/config'
 require 'sinatra-admin/models/admin'
+require "sinatra-admin/presenters/csv_generator"
 
 module SinatraAdmin
   class << self
