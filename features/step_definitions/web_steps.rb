@@ -217,3 +217,8 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+Then(/^I should receive a file "(.*?)"$/) do |filename|
+  page.response_headers['Content-Type'].should == "application/csv"
+  page.response_headers['Content-Disposition'].should include("filename=\"#{filename}-#{Date.today.to_s}.csv\"")
+end

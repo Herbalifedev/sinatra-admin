@@ -22,9 +22,9 @@
           - sort_attr, sort_by = params[:sort].blank? ? "" : params[:sort].split(' ')
           - @model.attribute_names.each do |attr|
             %th
-              %a{href: "/admin/#{@route}?#{url_query_string(attr, sort_attr, sort_by)}"} 
+              %a{href: "/admin/#{@route}?#{url_query_string(params, attr, sort_attr, sort_by)}"} 
                 = attr
-                = sort_attr.eql?(attr) ? (sort_by.eql?("asc") ? '&uarr;' : '&darr;' )  : ''
+                = sort_attr.eql?(attr) ? sorting_symbol(sort_by) : ''
 
       %tbody
         - if @collection.any?
