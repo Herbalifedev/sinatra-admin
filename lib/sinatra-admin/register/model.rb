@@ -11,27 +11,27 @@ module SinatraAdmin
 
           #INDEX
           get "/#{route}/?" do
-            sort_attr, sort_by = params[:sort].blank? ? %w(created_at desc) : params[:sort].split(" ")
+            sort_attr, sort_by = get_sort_attr_and_sort_by(params[:sort])
             @collection = model.send(sort_by, sort_attr).page(params[:page] || 1)
             haml :index, format: :html5
           end
 
           #EXPORT ALL
           get "/#{route}/export/all/?" do
-            sort_attr, sort_by = params[:sort].blank? ? %w(created_at desc) : params[:sort].split(" ")
+            sort_attr, sort_by = get_sort_attr_and_sort_by(params[:sort])
             @collection = model.send(sort_by, sort_attr)
             content_type 'application/csv'
             attachment "#{route}-all-#{Date.today.to_s}.csv"
-            Presenters::CsvGenerator.new(@collection, model.attribute_names).export_csv
+            SinatraAdmin::Presenters::CsvGenerator.new(@collection, model.attribute_names).export_csv
           end
 
           #EXPORT CURRENT PAGE
           get "/#{route}/export/page/?" do
-            sort_attr, sort_by = params[:sort].blank? ? %w(created_at desc) : params[:sort].split(" ")
+            sort_attr, sort_by = get_sort_attr_and_sort_by(params[:sort])
             @collection = model.send(sort_by, sort_attr).page(params[:page] || 1)
             content_type 'application/csv'
             attachment "#{route}-page-#{Date.today.to_s}.csv"
-            Presenters::CsvGenerator.new(@collection, model.attribute_names).export_csv
+            SinatraAdmin::Presenters::CsvGenerator.new(@collection, model.attribute_names).export_csv
           end
 
           #NEW

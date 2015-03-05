@@ -25,7 +25,7 @@ module SinatraAdmin
 
     helpers SinatraAdmin::SessionHelper
     helpers SinatraAdmin::TemplateLookupHelper
-    helpers SinatraAdmin::SortableParams
+    helpers SinatraAdmin::SortableParamsHelper
     helpers WillPaginate::Sinatra::Helpers
 
     use Rack::MethodOverride

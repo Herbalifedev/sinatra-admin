@@ -15,6 +15,7 @@ Feature: Users listing
   Scenario: Admin sees user listing when there are records
     Given I add SinatraAdmin as middleware
     And I register "User" resource
+    And I set 30 items per page
     And I am an Admin
     And I am logged in as admin
     And There are users
