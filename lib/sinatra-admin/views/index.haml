@@ -1,9 +1,9 @@
-.row-fluid
-  .span12
+.row
+  .col-md-12
     %h2="#{@model.to_s.pluralize} - Index"
 
-.row-fluid
-  .span12
+.row
+  .col-md-12
     %ul.nav.nav-pills
       %li.disabled
         %a{href: "#"} Options
@@ -14,15 +14,15 @@
       %li
         %a{href: "/admin/#{@route}/export/page?#{params.to_query}"} Export current page
 
-.row-fluid
-  .span12
+.row
+  .col-md-12
     %table.table.table-hover.table-condensed
       %thead
         %tr
           - sort_attr, sort_by = params[:sort].blank? ? "" : params[:sort].split(' ')
           - @model.attribute_names.each do |attr|
             %th
-              %a{href: "/admin/#{@route}?#{url_query_string(params, attr, sort_attr, sort_by)}"} 
+              %a{href: "/admin/#{@route}?#{url_query_string(params, attr, sort_attr, sort_by)}"}
                 = attr
                 = sort_attr.eql?(attr) ? sorting_symbol(sort_by) : ''
 
@@ -46,6 +46,6 @@
           %tr
             %td{colspan: "#{@model.attribute_names.size}"}
               %h5 There are not records in the database
-.row-fluid
-  .span12
+.row
+  .col-md-12
     = will_paginate @collection

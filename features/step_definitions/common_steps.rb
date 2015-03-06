@@ -1,5 +1,5 @@
 Given /^I am an Admin$/ do
-  @admin = SinatraAdmin.config.admin_model.create(email: "admin@mail.com", password: "admin") 
+  @admin = SinatraAdmin.config.admin_model.create(email: "admin@mail.com", password: "admin")
 end
 
 Given /^I am logged in as admin$/ do
