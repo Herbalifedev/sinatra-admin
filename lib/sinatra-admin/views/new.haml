@@ -1,21 +1,20 @@
-.row-fluid
-  .span12
+.row
+  .col-md-12
     %h2="#{@model.to_s} - New"
 
-.row-fluid
-  .span12
+.row
+  .col-md-12
     %ul.nav.nav-pills
       %li.disabled
         %a{href: "#"} Options
       %li
         %a{href: "/admin/#{@route}"} Index
 
-.row-fluid
-  .span12
+.row
+  .col-md-12
     %form{method: 'post', action: "/admin/#{@route}/"}
-      %fieldset
-        %legend Please fill out the fields
-        - (@model.attribute_names - @model.protected_attributes.to_a).each do |attr|
+      - (@model.attribute_names - @model.protected_attributes.to_a).each do |attr|
+        .form-group{class: ("has-error" if @resource.errors[attr].any?)}
           %label{for: "#{attr}"}= attr
           %input{id: "#{attr}", type: "text", value: "#{@resource[attr]}", name: "data[#{attr}]"}
           %span= @resource.errors[attr] if @resource.errors[attr].any?

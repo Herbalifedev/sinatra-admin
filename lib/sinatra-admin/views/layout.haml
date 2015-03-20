@@ -2,38 +2,70 @@
 %html{lang: "en-US"}
   %head
     %meta{charset: 'UTF=8'}
+    %meta{'http-equiv' => 'X-UA-Compatible', content: 'IE=edge'}
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
     %link{href: "/admin/css/bootstrap.min.css", rel: "stylesheet"}
-    %link{href: "/admin/css/bootstrap-lightbox.min.css", rel: "stylesheet"}
+    %link{href: "/admin/css/bootstrap-theme.min.css", rel: "stylesheet"}
+    %link{href: "/admin/css/bootstrap-datetimepicker.min.css", rel: "stylesheet"}
+    %link{href: "/admin/css/ekko-lightbox.min.css", rel: "stylesheet"}
+    %link{href: "/admin/css/sticky-footer.css", rel: "stylesheet"}
     %style
-      body { padding-top: 60px; }
-    %link{href: "/admin/css/bootstrap-responsive.min.css", rel: "stylesheet"}
+      body { min-height: 200px; padding-top: 20px; padding-bottom: 20px}
+      .navbar { margin-bottom: 20px }
     %title Sinatra Admin
+    /HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
+    <!--[if lt IE 9]><!-->
+    %script{src: "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"}
+    %script{src: "https://oss.maxcdn.com/respond/1.4.2/respond.min.js"}
+    <!--<![endif]-->
+
 
   %body
-    .navbar.navbar-fixed-top.navbar-inverse{:style => "position:static;"}
-      .navbar-inner
-        .container
-          %a.btn.btn-navbar{data: {toggle: "collapse", target: ".nav-collapse"}}
+    .container
+      / Static navbar
+      %nav.navbar.navbar-default
+        .container-fluid
+          .navbar-header
+            %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-              %a.brand{href: "/admin"}
-                SinatraAdmin
-                %small.muted{style: "font-size: 12px"}= " v#{SinatraAdmin::VERSION}"
-          .nav-collapse.collapse
-            %ul.nav
-              - SinatraAdmin.config.routes.each do |route|
-                %li
-                  %a{href: "/admin/#{route}"}= route.humanize
-            %ul.nav.pull-right
+          %a.navbar-brand{:href => "/admin"}
+            SinatraAdmin
+            %small.muted{style: "font-size: 12px"}= " v#{SinatraAdmin::VERSION}"
+          #navbar.navbar-collapse.collapse
+            %ul.nav.navbar-nav
+            %ul.nav.navbar-nav.navbar-right
+              %li.dropdown
+                %a.dropdown-toggle{href: '#', "aria-expanded" => "false", "data-toggle" => "dropdown", :role => "button"}
+                  Menu Navigations
+                  %span.caret
+                %ul.dropdown-menu{role: "menu"}
+                  - SinatraAdmin.config.routes.each do |route|
+                    - if "/#{route}" == request.path_info
+                      %li.active
+                        %a{href: "/admin/#{route}"}= route.humanize
+                    - else
+                      %li
+                        %a{href: "/admin/#{route}"}= route.humanize
               %li
-                %a{href: "/admin/logout"} Logout
+                %a{:href => "/admin/logout"} Logout
+      / /.nav-collapse
+    / /.container-fluid
 
-    %script{src: "/admin/js/jquery-2.1.1.min.js"}
-    %script{src: "/admin/js/bootstrap.min.js"}
-    %script{src: "/admin/js/bootstrap-datepicker.js"}
-    %script{src: "/admin/js/bootstrap-lightbox.min.js"}
+    %script{src: "/admin/js/jquery.min.js"}
+    %script{src: "/admin/js/moment.min.js"}
+    %script{src: "/admin/js/locales.min.js"}
+    %script{src: "/admin/js/bootstrap-datetimepicker.min.js"}
 
     .container
       =yield
+
+    %footer.footer
+      .container
+        %p.text-muted
+          Sinatra Admin
+
+    %script{src: "/admin/js/bootstrap.min.js"}
+    %script{src: "/admin/js/ekko-lightbox.min.js"}

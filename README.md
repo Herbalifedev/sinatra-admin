@@ -1,6 +1,6 @@
-# SinatraAdmin [![Build Status](https://travis-ci.org/Herbalifedev/sinatra-admin.svg?branch=master)](https://travis-ci.org/Herbalifedev/sinatra-admin) 
+# SinatraAdmin [![Build Status](https://travis-ci.org/Herbalifedev/sinatra-admin.svg?branch=master)](https://travis-ci.org/Herbalifedev/sinatra-admin)
 
-Sinatra application that allows us to have an admin dashboard with 
+Sinatra application that allows us to have an admin dashboard with
 minimal effort.
 
 ## Installation
@@ -65,7 +65,7 @@ namespace. This is how SinatraAdmin should be configured:
 
 5. Define your root resource(optional). This is going to be the first
    page where the application is going to redirect you after the login.
-   SinatraAdmin defines the first registered resource as the default root. 
+   SinatraAdmin defines the first registered resource as the default root.
    In this case it will get 'User'(according to point number 3). If you
    want, you can set a different resource as the default one.
     ```ruby
@@ -93,16 +93,16 @@ namespace. This is how SinatraAdmin should be configured:
    saying something like: "Errno::ENOENT at /admin/stats No such file or
    directory - /path/to/the/gem/sinatra-admin/views/stats/index.haml"
    It's because SinatraAdmin tries to find the template in the views
-   folder of sinatra-admin. Obviously, that custom template does not exist 
-   in the gem. SinatraAdmin has a method to extend the views path and it 
-   allows us to find the template that we are looking for. This takes us to 
+   folder of sinatra-admin. Obviously, that custom template does not exist
+   in the gem. SinatraAdmin has a method to extend the views path and it
+   allows us to find the template that we are looking for. This takes us to
    the next point.
 
 7. Extend your views path(Only for custom resources). SinatraAdmin has
    the method :extend_views_from. This method receives a value that
    should either be a String instance with the path to views folder or
-   be a Sinatra application. SinatraAdmin expects to be mounted over an 
-   "admin" namespace, that's why it's going to look the view in: 
+   be a Sinatra application. SinatraAdmin expects to be mounted over an
+   "admin" namespace, that's why it's going to look the view in:
    the/extented/path/admin
     ```ruby
     class MyApp::Admin
@@ -161,12 +161,14 @@ access them(only the URL). This is a TODO feature.
 ## Notes
 
 * SinatraAdmin uses Mongoid by default. TODO: Add activeRecord support.
- 
+
 * SinatraAdmin uses Warden for authentication.
 
-* SinatraAdmin uses Bootstrap(2.3.2) and Jquery(2.1.1).
+* SinatraAdmin uses Bootstrap(3.3.2) and Jquery(2.1.3).
 
-* SinatraAdmin uses Bootstrap Datepicker. More info http://www.eyecon.ro/bootstrap-datepicker/
+* SinatraAdmin uses Bootstrap 3 Datepicker v4. More info http://eonasdan.github.io/bootstrap-datetimepicker/
+
+* SinatraAdmin uses Moment.js for parse, validate, manipulate, and display dates in JavaScript. More info http://momentjs.com/
 
 * SinatraAdmin comes with an Admin model by default. The constant is
 SinatraAdmin::Admin. It has :first_name, :last_name, :email and
@@ -178,7 +180,7 @@ features but also writing documentation, adding issues, refactoring code
 or just sending us either a <3 if you liked the project or a </3 if you
 did not like it ;)
 
-* Current version: 0.1.2
+* Current version: 0.2.0
 
 ## Contributing
 

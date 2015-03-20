@@ -1,9 +1,9 @@
-.row-fluid
-  .span12
+.row
+  .col-md-12
     %h2="#{@model.to_s} - Show"
 
-.row-fluid
-  .span12
+.row
+  .col-md-12
     %ul.nav.nav-pills
       %li.disabled
         %a{href: "#"} Options
@@ -12,8 +12,8 @@
       %li
         %a{href: "/admin/#{@route}/#{@resource.id}/edit"} Edit
 
-.row-fluid
-  .span12
+.row
+  .col-md-12
     %ul.nav.nav-tabs
       %li.active
         %a{href: "#"} Details
