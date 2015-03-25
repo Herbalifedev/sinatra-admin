@@ -16,7 +16,20 @@
       %fieldset
         %legend Please fill out the fields
         - (@model.attribute_names - @model.protected_attributes.to_a).each do |attr|
-          %label{for: "#{attr}"}= attr
-          %input{id: "#{attr}", type: "text", value: "#{@resource[attr]}", name: "data[#{attr}]"}
-          %span= @resource.errors[attr] if @resource.errors[attr].any?
+          - if attr.eql?("roles")
+            %label{for: attr}= attr
+            - (0..2).each do |i|
+              %select.span2{name: "data[roles][]"}
+                %option{value: ''} Select Role
+                - SinatraAdmin::Admin::ROLES.each do |role|
+                  %option{value: role} #{role}
+              %span= @resource.errors[:roles] if @resource.errors[:roles].any?
+          - elsif attr.eql?("password_hash")
+            %label{for: "password"}= "password"
+            %input{id: "password", type: "text", value: "#{@resource[attr]}", name: "data[password]"}
+            %span= @resource.errors[attr] if @resource.errors[attr].any?
+          - else
+            %label{for: "#{attr}"}= attr
+            %input{id: "#{attr}", type: "text", value: "#{@resource[attr]}", name: "data[#{attr}]"}
+            %span= @resource.errors[attr] if @resource.errors[attr].any?
       %button.btn.btn-primary{type: "submit", id: "create"} Create

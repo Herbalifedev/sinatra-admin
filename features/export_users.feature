@@ -7,6 +7,7 @@ Feature: Users exporting
     Given I add SinatraAdmin as middleware
     And I register "User" resource
     And I am an Admin
+    And I got role "read"
     And There are users
     When I go to users listing
     Then I should see "Sign in SinatraAdmin"
@@ -17,6 +18,7 @@ Feature: Users exporting
     And I register "User" resource
     And I am an Admin
     And I am logged in as admin
+    And I got role "read"
     And There are users
     When I go to users listing
     Then I should see "Users - Index"
@@ -42,6 +44,7 @@ Feature: Users exporting
     And I set 1 items per page
     And I am an Admin
     And I am logged in as admin
+    And I got role "read"
     And There are users
     When I go to users listing
     And I follow "3"

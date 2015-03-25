@@ -18,6 +18,7 @@ Feature: Users listing
     And I set 30 items per page
     And I am an Admin
     And I am logged in as admin
+    And I got role "read"
     And There are users
     When I go to users listing
     Then I should see "Users - Index"
@@ -48,6 +49,7 @@ Feature: Users listing
     And I register "User" resource
     And I am an Admin
     And I am logged in as admin
+    And I got role "read"
     And There are not users
     When I go to users listing
     Then I should see "Users - Index"
@@ -63,6 +65,7 @@ Feature: Users listing
     And I set 1 items per page
     And I am an Admin
     And I am logged in as admin
+    And I got role "read"
     And There are users
     When I go to users listing
     Then I should see "Users - Index"
@@ -86,6 +89,7 @@ Feature: Users listing
     And I set 1 items per page
     And I am an Admin
     And I am logged in as admin
+    And I got role "read"
     And There are users
     When I go to users listing
     And I follow "2"

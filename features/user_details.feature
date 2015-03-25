@@ -9,6 +9,7 @@ Feature: User show
     And I register "User" resource
     And I am an Admin
     And There are users
+    And I got role "read"
     When I go to users listing
     Then I should see "Sign in SinatraAdmin"
     And I should see "You must log in"
@@ -18,6 +19,7 @@ Feature: User show
     And I register "User" resource
     And I am an Admin
     And I am logged in as admin
+    And I got role "read"
     And There are users
     And I am on users listing
     And I follow "3"

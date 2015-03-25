@@ -8,6 +8,7 @@ Feature: Admin login
     And I am an Admin
     And I register "User" resource
     And I am logged in as admin
+    And I got role "all"
     And I am on the home page
     When I follow "Logout"
     Then I should see "Sign in SinatraAdmin"
