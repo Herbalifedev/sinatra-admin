@@ -9,8 +9,9 @@
         %a{href: "#"} Options
       %li
         %a{href: "/admin/#{@route}"} Index
-      %li
-        %a{href: "/admin/#{@route}/#{@resource.id}/edit"} Edit
+      - if warden.user(:sinatra_admin).edit_access?
+        %li
+          %a{href: "/admin/#{@route}/#{@resource.id}/edit"} Edit
 
 .row-fluid
   .span12

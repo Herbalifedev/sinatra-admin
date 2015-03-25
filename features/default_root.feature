@@ -19,8 +19,9 @@ Feature: Default root
     And I register "Comment" resource
     And I am an Admin
     And I am logged in as admin
+    And I got role "read"
     And I define "User" as root resource
-   When I go to the home page
+    When I go to the home page
     Then I should see "Users - Index"
     And I should see "_id"
     And I should see "first_name"
@@ -34,6 +35,7 @@ Feature: Default root
     And I register "User" resource
     And I am an Admin
     And I am logged in as admin
+    And I got role "read"
     When I go to the home page
     Then I should see "Users - Index"
     And I should see "_id"

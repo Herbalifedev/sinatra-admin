@@ -9,6 +9,7 @@ require "sinatra-admin/helpers/template_lookup"
 require 'will_paginate_mongoid'
 require "will_paginate/view_helpers/sinatra"
 require "sinatra-admin/helpers/sortable_params"
+require "sinatra-admin/helpers/role_abilities"
 require "sinatra-admin/presenters/csv_generator"
 
 module SinatraAdmin
@@ -26,6 +27,7 @@ module SinatraAdmin
     helpers SinatraAdmin::SessionHelper
     helpers SinatraAdmin::TemplateLookupHelper
     helpers SinatraAdmin::SortableParamsHelper
+    helpers SinatraAdmin::RoleAbilitiesHelper
     helpers WillPaginate::Sinatra::Helpers
 
     use Rack::MethodOverride

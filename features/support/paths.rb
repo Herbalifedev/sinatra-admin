@@ -20,6 +20,10 @@ module NavigationHelpers
       '/admin/users'
     when /users custom page/
       '/admin/users/custom'
+    when /user create new/
+      '/admin/users/new'
+    when /user Carlo edit/
+      "/admin/users/#{@carlo.id}/edit"
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
         "Now, go and add a mapping in #{__FILE__}"
