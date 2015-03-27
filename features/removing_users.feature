@@ -8,6 +8,7 @@ Feature: User show
     Given I add SinatraAdmin as middleware
     And I register "User" resource
     And I am an Admin
+    And I got role "read, remove"
     And There are users
     When I go to users listing
     Then I should see "Sign in SinatraAdmin"
@@ -16,8 +17,10 @@ Feature: User show
   Scenario: Admin removes user from list
     Given I add SinatraAdmin as middleware
     And I register "User" resource
+    And I set 1 items per page
     And I am an Admin
     And I am logged in as admin
+    And I got role "read, remove"
     And There are users
     And I am on users listing
     And I follow "3"
@@ -33,3 +36,15 @@ Feature: User show
     And I should not see "Carlo"
     And I should not see "Cajucom"
     And I should not see "carlo@herbalife.com"
+
+  Scenario: Admin removes user from list without remove ability
+    Given I add SinatraAdmin as middleware
+    And I register "User" resource
+    And I set 1 items per page
+    And I am an Admin
+    And I am logged in as admin
+    And I got role "read"
+    And There are users
+    And I am on users listing
+    And I follow "3"
+    And I should not see "Delete"

@@ -36,4 +36,6 @@
     %script{src: "/admin/js/bootstrap-lightbox.min.js"}
 
     .container
+      - if flash.present?
+        .alert.alert-danger= styled_flash
       =yield

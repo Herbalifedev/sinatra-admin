@@ -14,15 +14,20 @@ module SinatraAdmin
     include Mongoid::Document
     include BCrypt
 
+    ROLES = %w(all create edit read remove)
+
     field :first_name, type: String
     field :last_name, type: String
     field :email, type: String
     field :password_hash, type: String
+    field :roles, type: Array
 
     validates :email,
               :password_hash, presence: true
 
     validates :email, email: true
+
+    before_save :remove_nil_element_and_uniqueness_role, if: :"self.roles.present?"
 
     def authenticate(attemp_password)
       password == attemp_password
@@ -35,6 +40,36 @@ module SinatraAdmin
     def password=(new_password)
       @password = Password.create(new_password)
       self.password_hash = @password
+    end
+
+    def create_access?
+      all_access? || self.roles.include?("create")
+    end
+
+    def edit_access?
+      all_access? || self.roles.include?("edit")
+    end
+
+    def read_access?
+      all_access? || self.roles.include?("read")
+    end
+
+    def remove_access?
+      all_access? || self.roles.include?("remove")
+    end
+
+    private
+    def all_access?
+      self.roles.include?("all")
+    end
+
+    def remove_nil_element_and_uniqueness_role
+      if all_access?
+        self.roles.clear.push("all")
+      else
+        self.roles.uniq!
+        self.roles.delete_if { |item| item.blank? }
+      end
     end
   end
 end

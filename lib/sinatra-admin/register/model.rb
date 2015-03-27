@@ -11,6 +11,7 @@ module SinatraAdmin
 
           #INDEX
           get "/#{route}/?" do
+            can_read? #Role ability
             sort_attr, sort_by = get_sort_attr_and_sort_by(params[:sort])
             @collection = model.send(sort_by, sort_attr).page(params[:page] || 1)
             haml :index, format: :html5
@@ -18,6 +19,7 @@ module SinatraAdmin
 
           #EXPORT ALL
           get "/#{route}/export/all/?" do
+            can_read? #Role ability
             sort_attr, sort_by = get_sort_attr_and_sort_by(params[:sort])
             @collection = model.send(sort_by, sort_attr)
             content_type 'application/csv'
@@ -27,6 +29,7 @@ module SinatraAdmin
 
           #EXPORT CURRENT PAGE
           get "/#{route}/export/page/?" do
+            can_read? #Role ability
             sort_attr, sort_by = get_sort_attr_and_sort_by(params[:sort])
             @collection = model.send(sort_by, sort_attr).page(params[:page] || 1)
             content_type 'application/csv'
@@ -36,12 +39,14 @@ module SinatraAdmin
 
           #NEW
           get "/#{route}/new/?" do
+            can_create? #Role ability
             @resource = model.new
             haml :new, format: :html5
           end
 
           #CREATE
           post "/#{route}/?" do
+            can_create? #Role ability
             @resource = model.new(params[:data])
             if @resource.save
               puts "Resource was created"
@@ -54,18 +59,21 @@ module SinatraAdmin
 
           #SHOW
           get "/#{route}/:id/?" do
+            can_read? #Role ability
             @resource = model.find(params[:id])
             haml :show, format: :html5
           end
 
           #EDIT
           get "/#{route}/:id/edit/?" do
+            can_edit? #Role ability
             @resource = model.find(params[:id])
             haml :edit, format: :html5
           end
 
           #UPDATE
           put "/#{route}/:id/?" do
+            can_edit? #Role ability
             @resource = model.find(params[:id])
             if @resource.update_attributes(params[:data])
               puts "Resource was updated"
@@ -78,6 +86,7 @@ module SinatraAdmin
 
           #DESTROY
           delete "/#{route}/:id/?" do
+            can_remove? #Role ability
             @resource = model.find(params[:id])
             if @resource.destroy
               puts "Resource was destroyed"

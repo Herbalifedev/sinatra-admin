@@ -6,6 +6,10 @@ Given /^I am logged in as admin$/ do
   login_as @admin, scope: :sinatra_admin
 end
 
+Given /^I got role "(.*?)"$/ do |role|
+  @admin.update_attribute(:roles, role.split(', '))
+end
+
 Given /^There are users$/ do
   @carlo = User.create(first_name: "Carlo", last_name: "Cajucom", email: "carlo@herbalife.com", created_at: 2.day.ago.utc)
   @fco = User.create(first_name: "Francisco", last_name: "Delgado", email: "francisco@herbalife.com", created_at: 1.day.ago.utc)

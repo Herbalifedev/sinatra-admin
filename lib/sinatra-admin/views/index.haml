@@ -7,8 +7,9 @@
     %ul.nav.nav-pills
       %li.disabled
         %a{href: "#"} Options
-      %li
-        %a{href: "/admin/#{@route}/new"} New
+      - if warden.user(:sinatra_admin).create_access?
+        %li
+          %a{href: "/admin/#{@route}/new"} New
       %li
         %a{href: "/admin/#{@route}/export/all?sort=#{params[:sort]}"} Export all
       %li
@@ -38,10 +39,11 @@
                 - else
                   %td
                     = record.send(attr)
-              %td
-                %form{method: 'post', action: "/admin/#{@route}/#{record.id}", style: "margin: 0"}
-                  %input{name: "_method", type: "hidden", value: "delete"}
-                  %button.btn-link{type: "submit", id: "delete_#{record.id}"} Delete
+              - if warden.user(:sinatra_admin).remove_access?
+                %td
+                  %form{method: 'post', action: "/admin/#{@route}/#{record.id}", style: "margin: 0"}
+                    %input{name: "_method", type: "hidden", value: "delete"}
+                    %button.btn-link{type: "submit", id: "delete_#{record.id}"} Delete
         - else
           %tr
             %td{colspan: "#{@model.attribute_names.size}"}
