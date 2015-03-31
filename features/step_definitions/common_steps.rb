@@ -67,6 +67,10 @@ When /^I click on Carlo remove button$/ do
   click_button("delete_#{@carlo.id.to_s}")
 end
 
-When(/^I click on Export "(.*?)"$/) do |export_by|
+When /^I click on Export "(.*?)"$/ do |export_by|
   click_link("Export #{export_by}")
+end
+
+When /^I click on user edit link for Carlo$/ do
+  visit "/admin/users/#{@carlo.id.to_s}"
 end

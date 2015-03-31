@@ -22,9 +22,7 @@ Feature: User show
     And I am logged in as admin
     And I got role "read"
     And There are users
-    When I go to users listing
-    And I follow "3"
-    When I click on Carlo id
+    When I click on user edit link for Carlo
     Then I should see "User - Show"
     And I should see "_id"
     And I should see "first_name"

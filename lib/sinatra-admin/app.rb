@@ -6,6 +6,7 @@ require 'sinatra/flash'
 require 'sinatra-admin/warden_strategies/sinatra_admin'
 require 'sinatra-admin/helpers/session'
 require "sinatra-admin/helpers/template_lookup"
+require 'sinatra-admin/helpers/data_table'
 require 'will_paginate_mongoid'
 require "will_paginate/view_helpers/sinatra"
 require "sinatra-admin/helpers/sortable_params"
@@ -28,6 +29,7 @@ module SinatraAdmin
     helpers SinatraAdmin::TemplateLookupHelper
     helpers SinatraAdmin::SortableParamsHelper
     helpers SinatraAdmin::RoleAbilitiesHelper
+    helpers SinatraAdmin::DataTableHelper
     helpers WillPaginate::Sinatra::Helpers
 
     use Rack::MethodOverride

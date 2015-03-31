@@ -14,6 +14,7 @@ Feature: Main Menu resources
     Then I should not see "Comments"
 
   Scenario: Admin sees main menu when he/she is logged in
+    Given AJAX not required
     Given I add SinatraAdmin as middleware
     And I register "User" resource
     And I register "Comment" resource
@@ -25,6 +26,7 @@ Feature: Main Menu resources
     Then I should see "Comments"
 
   Scenario: Admin navigates through main menu when he/she is logged in
+    Given AJAX not required
     Given I add SinatraAdmin as middleware
     And I register "User" resource
     And I am an Admin
@@ -35,6 +37,7 @@ Feature: Main Menu resources
     Then I should see "Users - Index"
 
   Scenario: Admin navigates through main menu when he/she is logged in
+    Given AJAX not required
     Given I add SinatraAdmin as middleware
     And I register "Comment" resource
     And I am an Admin

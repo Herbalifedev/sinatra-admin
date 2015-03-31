@@ -4,6 +4,7 @@ Feature: Admin login
   I want to logout when I click the "Lougout" link
 
   Scenario: Admin is able to logout
+    Given AJAX not required
     Given I add SinatraAdmin as middleware
     And I am an Admin
     And I register "User" resource
