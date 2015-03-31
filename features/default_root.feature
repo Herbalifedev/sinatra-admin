@@ -27,7 +27,7 @@ Feature: Default root
     And I should see "first_name"
     And I should see "last_name"
     And I should see "email"
-    And I should see "There are not records in the database"
+    And I should see "There are no records in the database"
 
   Scenario: Admin is redirected to first registered route when root resource is not defined
     Given I add SinatraAdmin as middleware
@@ -42,4 +42,4 @@ Feature: Default root
     And I should see "first_name"
     And I should see "last_name"
     And I should see "email"
-    And I should see "There are not records in the database"
+    And I should see "There are no records in the database"

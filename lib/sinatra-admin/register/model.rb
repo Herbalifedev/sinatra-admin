@@ -9,31 +9,36 @@ module SinatraAdmin
             @route = route
           end
 
+          get "/#{route}/data/json/?" do
+            content_type 'application/json'
+            dt_json(model)
+          end
+
           #INDEX
           get "/#{route}/?" do
             can_read? #Role ability
-            sort_attr, sort_by = get_sort_attr_and_sort_by(params[:sort])
-            @collection = model.send(sort_by, sort_attr).page(params[:page] || 1)
+            @collection = []
             haml :index, format: :html5
           end
 
           #EXPORT ALL
           get "/#{route}/export/all/?" do
             can_read? #Role ability
-            sort_attr, sort_by = get_sort_attr_and_sort_by(params[:sort])
-            @collection = model.send(sort_by, sort_attr)
-            content_type 'application/csv'
+            @collection = model.unscoped.all
+            if params[:data]
+              data = JSON.parse(params[:data])
+              order = data["order"]
+              order.each do |x|
+                cidx = x["column"].to_i
+                cdir = x["dir"]
+                attr = model.attribute_names[cidx]
+                @collection = @collection.send(cdir, attr)
+              end if order
+            end
+         
+            content_type 'text/csv', 'charset' => 'utf-8'
             attachment "#{route}-all-#{Date.today.to_s}.csv"
-            SinatraAdmin::Presenters::CsvGenerator.new(@collection, model.attribute_names).export_csv
-          end
-
-          #EXPORT CURRENT PAGE
-          get "/#{route}/export/page/?" do
-            can_read? #Role ability
-            sort_attr, sort_by = get_sort_attr_and_sort_by(params[:sort])
-            @collection = model.send(sort_by, sort_attr).page(params[:page] || 1)
-            content_type 'application/csv'
-            attachment "#{route}-page-#{Date.today.to_s}.csv"
+            #TODO: http://stackoverflow.com/questions/4348802/how-can-i-output-a-utf-8-csv-in-php-that-excel-will-read-properly 
             SinatraAdmin::Presenters::CsvGenerator.new(@collection, model.attribute_names).export_csv
           end
 

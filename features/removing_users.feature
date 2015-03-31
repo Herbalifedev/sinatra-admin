@@ -23,7 +23,6 @@ Feature: User show
     And I got role "read, remove"
     And There are users
     And I am on users listing
-    And I follow "3"
     When I click on Carlo remove button
     Then I should see "Users - Index"
     And I should see "_id"
@@ -46,5 +45,4 @@ Feature: User show
     And I got role "read"
     And There are users
     And I am on users listing
-    And I follow "3"
     And I should not see "Delete"
