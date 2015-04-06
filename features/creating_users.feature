@@ -7,6 +7,7 @@ Feature: Creating Users
     Given I add SinatraAdmin as middleware
     And I register "User" resource
     And I am an Admin
+    And I got role "read, create"
     When I go to users listing
     Then I should see "Sign in SinatraAdmin"
     And I should see "You must log in"
@@ -16,6 +17,7 @@ Feature: Creating Users
     And I register "User" resource
     And I am an Admin
     And I am logged in as admin
+    And I got role "read, create"
     And I am on users listing
     When I follow "New"
     And I fill in "first_name" with "Vahak"
@@ -36,9 +38,28 @@ Feature: Creating Users
     And I register "User" resource
     And I am an Admin
     And I am logged in as admin
+    And I got role "read, create"
     And I am on users listing
     When I follow "New"
     And I fill in "first_name" with "Vahak"
     And I fill in "last_name" with "Matavosian"
     And I press "Create"
     Then I should see "email ["can't be blank"]"
+
+  Scenario: Admin tries to create a user without create ability
+    Given I add SinatraAdmin as middleware
+    And I register "User" resource
+    And I am an Admin
+    And I am logged in as admin
+    And I got role "read"
+    When I go to users listing
+    And I should not see "New"
+
+  Scenario: Admin tries to create a user without create ability
+    Given I add SinatraAdmin as middleware
+    And I register "User" resource
+    And I am an Admin
+    And I am logged in as admin
+    And I got role "read"
+    And I go to user create new
+    Then I should see "Sorry you aren't allow to access"

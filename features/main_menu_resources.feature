@@ -8,6 +8,7 @@ Feature: Main Menu resources
     And I register "User" resource
     And I register "Comment" resource
     And I am an Admin
+    And I got role "all"
     When I go to the login page
     Then I should not see "Users"
     Then I should not see "Comments"
@@ -18,6 +19,7 @@ Feature: Main Menu resources
     And I register "Comment" resource
     And I am an Admin
     And I am logged in as admin
+    And I got role "all"
     When I go to the home page
     Then I should see "Users"
     Then I should see "Comments"
@@ -27,6 +29,7 @@ Feature: Main Menu resources
     And I register "User" resource
     And I am an Admin
     And I am logged in as admin
+    And I got role "all"
     When I go to the home page
     And I follow "Users"
     Then I should see "Users - Index"
@@ -36,6 +39,7 @@ Feature: Main Menu resources
     And I register "Comment" resource
     And I am an Admin
     And I am logged in as admin
+    And I got role "all"
     When I go to the home page
     And I follow "Comments"
     Then I should see "Comments - Index"
