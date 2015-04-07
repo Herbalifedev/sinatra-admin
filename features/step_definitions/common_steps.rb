@@ -11,9 +11,9 @@ Given /^I got role "(.*?)"$/ do |role|
 end
 
 Given /^There are users$/ do
-  @carlo = User.create(first_name: "Carlo", last_name: "Cajucom", email: "carlo@herbalife.com", created_at: 2.day.ago.utc)
-  @fco = User.create(first_name: "Francisco", last_name: "Delgado", email: "francisco@herbalife.com", created_at: 1.day.ago.utc)
-  @vahak = User.create(first_name: "Vahak", last_name: "Matavosian", email: "vahak@herbalife.com", created_at: Time.now.utc)
+  @carlo = User.create(first_name: "Carlo", last_name: "Cajucom", email: "carlo@herbalife.com", password_hash: "cpass", created_at: 2.day.ago.utc)
+  @fco = User.create(first_name: "Francisco", last_name: "Delgado", email: "francisco@herbalife.com", password_hash: "fpass", created_at: 1.day.ago.utc)
+  @vahak = User.create(first_name: "Vahak", last_name: "Matavosian", email: "vahak@herbalife.com", password_hash: "vpass", created_at: Time.now.utc)
 end
 
 Given /^There are not users$/ do

@@ -23,6 +23,7 @@ Feature: Creating Users
     And I fill in "first_name" with "Vahak"
     And I fill in "last_name" with "Matavosian"
     And I fill in "email" with "vahak@herbalife.com"
+    And I fill in "password" with "vpass"
     And I press "Create"
     Then I should see "User - Show"
     Then I should see "_id"
@@ -45,6 +46,7 @@ Feature: Creating Users
     And I fill in "last_name" with "Matavosian"
     And I press "Create"
     Then I should see "email ["can't be blank"]"
+    Then I should see "password ["can't be blank"]"
 
   Scenario: Admin tries to create a user without create ability
     Given I add SinatraAdmin as middleware

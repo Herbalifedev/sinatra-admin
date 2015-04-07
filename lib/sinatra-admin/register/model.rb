@@ -84,6 +84,25 @@ module SinatraAdmin
             end
           end
 
+          # CHANGE PASSWORD
+          get "/#{route}/:id/change_password/?" do
+            @resource = model.find(params[:id])
+            haml :change_password, format: :html5
+          end
+
+          #UPDATE PASSWORD
+          put "/#{route}/:id/update_password/?" do
+            can_edit? #Role ability
+            @resource = model.find(params[:id])
+            if @resource.update_attributes(params[:data])
+              puts "Resource was updated"
+              redirect "/admin/#{@route}/#{@resource.id}"
+            else
+              puts "Validation Errors"
+              haml :change_password, format: :html5
+            end
+          end
+
           #DESTROY
           delete "/#{route}/:id/?" do
             can_remove? #Role ability
