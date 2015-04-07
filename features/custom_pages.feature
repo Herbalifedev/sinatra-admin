@@ -18,6 +18,7 @@ Feature: Custom Pages
     And I register my custom page
     And I am an Admin
     And I am logged in as admin
+    And I got role "read"
     And There are users
     When I go to my custom page
     And I should see "Welcome to SinatraAdmin custom pages!"
