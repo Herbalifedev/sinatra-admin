@@ -22,9 +22,11 @@ module SinatraAdmin
     field :password_hash, type: String
     field :roles, type: Array
 
-    validates :email,
-              :password_hash, presence: true
+    #validates :email,
+    #          :password_hash, presence: true
 
+    validates_presence_of :password_hash, if: Proc.new { |admin| admin.new_record? || admin.password_hash_changed? }
+    validates_presence_of :email, :roles
     validates :email, email: true
 
     before_save :remove_nil_element_and_uniqueness_role, if: :"self.roles.present?"
@@ -38,8 +40,12 @@ module SinatraAdmin
     end
 
     def password=(new_password)
-      @password = Password.create(new_password)
-      self.password_hash = @password
+      if new_password.present?
+        @password = Password.create(new_password)
+        self.password_hash = @password
+      else
+        self.password_hash = nil
+      end
     end
 
     def create_access?

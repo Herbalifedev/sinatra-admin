@@ -23,4 +23,9 @@
       %p
         %span
           %code= "#{attr}: "
-        %span= @resource.send(attr)
+        %span
+          - if attr.eql?("password_hash")
+            *****
+            %a{href: "/admin/#{@route}/#{@resource.id}/change_password"} Change Password
+          - else
+            = @resource.send(attr)
