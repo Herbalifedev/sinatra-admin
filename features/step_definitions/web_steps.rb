@@ -13,6 +13,18 @@ Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
+Given /^AJAX not required$/ do
+  Capybara.current_driver = :rack_test
+end
+
+Given /^I will download an attachment$/ do
+  Capybara.current_driver = :rack_test
+end
+
+When /^I download from "(.+)"$/ do |link|
+  visit link
+end
+
 When /^(?:|I )go to (.+)$/ do |page_name|
   visit path_to(page_name)
 end
@@ -219,6 +231,16 @@ Then /^show me the page$/ do
 end
 
 Then(/^I should receive a file "(.*?)"$/) do |filename|
-  page.response_headers['Content-Type'].should == "application/csv"
-  page.response_headers['Content-Disposition'].should include("filename=\"#{filename}-#{Date.today.to_s}.csv\"")
+  begin
+    page.response_headers['Content-Type'].should == "text/csv;charset=utf-8"
+    page.response_headers['Content-Disposition'].should include("filename=\"#{filename}-#{Date.today.to_s}.csv\"")
+  rescue RSpec::Expectations::ExpectationNotMetError => e
+    puts page.response_headers.inspect
+    puts page.body
+    raise e
+  end
+end
+
+Then /^I click OK on the popup dialog$/ do
+  page.driver.browser.switch_to.alert.accept
 end

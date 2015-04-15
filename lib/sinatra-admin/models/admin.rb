@@ -20,7 +20,7 @@ module SinatraAdmin
     field :last_name, type: String
     field :email, type: String
     field :password_hash, type: String
-    field :roles, type: Array
+    field :roles, type: Array, default: []
 
     #validates :email,
     #          :password_hash, presence: true

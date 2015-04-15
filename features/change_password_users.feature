@@ -26,6 +26,7 @@ Feature: Users change password
     And I should see "User - Change Password"
     And I fill in "password" with "admin1234"
     And I press "Change Password"
+    And I click OK on the popup dialog
     Then I should see "User - Show"
     And I should see "_id"
     And I should see "first_name"
@@ -48,4 +49,5 @@ Feature: Users change password
     And I should see "User - Change Password"
     And I fill in "password" with ""
     And I press "Change Password"
+    And I click OK on the popup dialog
     Then I should see "password ["can't be blank"]"
