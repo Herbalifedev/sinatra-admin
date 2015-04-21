@@ -1,5 +1,7 @@
 require 'mongoid'
 require 'warden'
+require 'dotenv'
+require 'rack/csrf'
 require 'sinatra/base'
 require 'sinatra/namespace'
 require 'sinatra/flash'
@@ -7,6 +9,7 @@ require 'sinatra-admin/warden_strategies/sinatra_admin'
 require 'sinatra-admin/helpers/session'
 require "sinatra-admin/helpers/template_lookup"
 require 'sinatra-admin/helpers/data_table'
+require 'sinatra-admin/helpers/form_authenticity_token'
 require 'will_paginate_mongoid'
 require "will_paginate/view_helpers/sinatra"
 require "sinatra-admin/helpers/sortable_params"
@@ -15,6 +18,7 @@ require "sinatra-admin/presenters/csv_generator"
 
 module SinatraAdmin
   class App < Sinatra::Base
+    Dotenv.load ".env.#{settings.environment.to_s}"
     Mongoid.raise_not_found_error = false
     I18n.config.enforce_available_locales = false
 
@@ -30,9 +34,12 @@ module SinatraAdmin
     helpers SinatraAdmin::SortableParamsHelper
     helpers SinatraAdmin::RoleAbilitiesHelper
     helpers SinatraAdmin::DataTableHelper
+    helpers SinatraAdmin::FormAuthenticityTokenHelper
     helpers WillPaginate::Sinatra::Helpers
 
     use Rack::MethodOverride
+    use Rack::Session::Cookie, secret: ENV['SINATRA_ADMIN_SECRET']
+    use Rack::Csrf, :raise => true
     use Warden::Manager do |config|
       config.serialize_into_session(:sinatra_admin){|admin| admin.id }
       config.serialize_from_session(:sinatra_admin){|id| SinatraAdmin.config.admin_model.find(id) }

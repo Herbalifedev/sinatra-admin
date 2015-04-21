@@ -22,6 +22,7 @@
 
             .modal-body
               %form.form-horizontal{method: 'post', action: "/admin/login"}
+                = csrf_tag
                 %fieldset
                   .control-group
                     %label.control-label{for: "email"} Email
