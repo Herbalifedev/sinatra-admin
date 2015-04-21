@@ -56,6 +56,7 @@
   function renderAction (data, type, row) {
   - if warden.user(:sinatra_admin).remove_access?
     var html = '<form method="post" action="/admin/#{@route}/' + row['_id'] + '" style="margin: 0">';
+    html += '#{csrf_tag}';
     html += '<input type="hidden" name="_method" value="delete"/>';
     html += '<button class="btn-link" id="delete_' + row['_id'] + '" type="submit">Delete</button></form>';
     return html;

@@ -13,6 +13,7 @@
 .row-fluid
   .span12
     %form{method: 'post', action: "/admin/#{@route}/#{@resource.id}"}
+      = csrf_tag
       %fieldset
         %legend Please fill out the fields
         %input{name: "_method", type: "hidden", value: "put"}
