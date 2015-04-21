@@ -34,4 +34,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'warden',          '~> 1.2.3'
   spec.add_dependency 'activesupport'
   spec.add_dependency 'bcrypt'
+  spec.add_dependency 'dotenv'
+  spec.add_dependency 'rack_csrf'
 end
