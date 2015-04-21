@@ -17,7 +17,7 @@
       %fieldset
         %legend Please fill out the fields
         %input{name: "_method", type: "hidden", value: "put"}
-        - (@model.attribute_names - @model.protected_attributes.to_a).each do |attr|
+        - (@configure.attribute_names - @model.protected_attributes.to_a).each do |attr|
           - if attr.eql?("roles") && @model.to_s.eql?('SinatraAdmin::Admin')
             %label{for: attr}= attr
             - (0..2).each do |i|

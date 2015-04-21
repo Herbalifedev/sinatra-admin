@@ -1,17 +1,18 @@
 module SinatraAdmin
   module Register
     class Model < Base
-      def generate!(&block)
-        app.namespace("/#{route}", &block) if block_given?
-        app.instance_exec(resource_constant, route) do |model, route|
+      def generate!
+        app.namespace("/#{route}", &configure.resource) if configure.resource
+        app.instance_exec(resource_constant, route, configure) do |model, route, configure|
           before "/#{route}/?*" do
             @model = model
             @route = route
+            @configure = configure
           end
 
           get "/#{route}/data/json/?" do
             content_type 'application/json'
-            dt_json(model)
+            dt_json
           end
 
           #INDEX
@@ -31,7 +32,7 @@ module SinatraAdmin
               order.each do |x|
                 cidx = x["column"].to_i
                 cdir = x["dir"]
-                attr = model.attribute_names[cidx]
+                attr = configure.attribute_names[cidx]
                 @collection = @collection.send(cdir, attr)
               end if order
             end
@@ -39,7 +40,7 @@ module SinatraAdmin
             content_type 'text/csv', 'charset' => 'utf-8'
             attachment "#{route}-all-#{Date.today.to_s}.csv"
             #TODO: http://stackoverflow.com/questions/4348802/how-can-i-output-a-utf-8-csv-in-php-that-excel-will-read-properly 
-            SinatraAdmin::Presenters::CsvGenerator.new(@collection, model.attribute_names).export_csv
+            SinatraAdmin::Presenters::CsvGenerator.new(@collection, configure.attribute_names).export_csv
           end
 
           #NEW

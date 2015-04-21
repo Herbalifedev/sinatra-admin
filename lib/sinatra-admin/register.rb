@@ -1,3 +1,4 @@
+require 'sinatra-admin/register/configure'
 require 'sinatra-admin/register/base'
 require 'sinatra-admin/register/model'
 require 'sinatra-admin/register/custom'

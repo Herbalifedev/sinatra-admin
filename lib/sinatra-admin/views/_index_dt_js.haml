@@ -65,7 +65,7 @@
   }
   var columns = [
   - sep = ""
-  - @model.attribute_names.each do |attr|
+  - @configure.attribute_names.each do |attr|
     = "#{sep}{\"data\":\"#{attr}\"}"
     - sep = ","
   ,{"data":null}
@@ -73,7 +73,7 @@
   var columnsDefs = [
   { "render": renderShowLink, "targets": 0 }
   - idx = -1
-  - @model.attribute_names.each do |attr|
+  - @configure.attribute_names.each do |attr|
     - idx = idx + 1
     - if @model.fields[attr].type == Object
       - metadata    = @model.fields[attr].options[:metadata]

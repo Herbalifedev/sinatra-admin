@@ -19,7 +19,7 @@
       %li.active
         %a{href: "#"} Details
 
-    - @model.attribute_names.each do |attr|
+    - @configure.attribute_names.each do |attr|
       %p
         %span
           %code= "#{attr}: "

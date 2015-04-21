@@ -2,22 +2,22 @@ module SinatraAdmin
   module DataTableHelper
     extend self
  
-    def dt_json (model)
+    def dt_json
 
-      records = dt_source(model)
+      records = dt_source
       recordsTotal = records.count
       
-      records = dt_order(model, records)
-      records = dt_filter(model, records)
+      records = dt_order(records)
+      records = dt_filter(records)
       recordsFiltered = records.count
       
       records = dt_limit(records)
 
       data = []
-      records.each do |r|
+      records.each do |row|
         item = {}
-        model.attribute_names.each do |attr|
-          item[attr] = r[attr]
+        @configure.attribute_names.each do |attr|
+          item[attr] = @configure.render(attr, row)
         end
         data << item
       end
@@ -30,11 +30,11 @@ module SinatraAdmin
       }.to_json
     end
 
-    def dt_order (model, records)
+    def dt_order (records)
       params[:order].each do |order|
         cIdx = order[1]['column'].to_i
         cDir = order[1]['dir'].to_sym
-        attr = model.attribute_names[cIdx].to_sym
+        attr = @configure.attribute_names[cIdx].to_sym
         records = records.send(cDir, attr)
       end
       records
@@ -47,11 +47,11 @@ module SinatraAdmin
       records
     end
 
-    def dt_source (model)
+    def dt_source ()
       if params[:order].count > 0
-        records = model.unscoped.all
+        records = @model.unscoped.all
       else
-        records = model.all
+        records = @model.all
       end
       records
     end
@@ -60,23 +60,23 @@ module SinatraAdmin
     # ~ Filters ---------------------------------------------------------------- 
     #
     
-    def dt_filter (model, records)
+    def dt_filter (records)
       params[:columns].each do |column|
         attr     = column[1]['data']
         search   = column[1]['search']['value'].strip
         next if search.blank?
         
 
-        attrType = model.fields[attr].type 
+        attrType = @model.fields[attr].type 
         
         if attrType == String || attrType == Moped::BSON::ObjectId || attrType == Object
-          records = dt_filter_string(model, records, attr, search)
+          records = dt_filter_string(records, attr, search)
         elsif attrType == Integer || attrType == Float
-          records = dt_filter_number(model, records, attr, search)
+          records = dt_filter_number(records, attr, search)
         elsif attrType == Boolean
-          records = dt_filter_boolean(model, records, attr, search)
+          records = dt_filter_boolean(records, attr, search)
         elsif attrType == Time
-          records = dt_filter_time(model, records, attr, search)
+          records = dt_filter_time(records, attr, search)
         else
           puts "I don't know how to filter this type: #{attrType}"
         end
@@ -111,17 +111,17 @@ module SinatraAdmin
       records
     end
 
-    def dt_filter_number_selector (model, attr, operator, value) 
-      model.unscoped.where(attr => { dt_filter_operator(operator) => value }).selector 
+    def dt_filter_number_selector (attr, operator, value) 
+      @model.unscoped.where(attr => { dt_filter_operator(operator) => value }).selector 
     end
 
-    def dt_filter_number (model, records, attr, search)
+    def dt_filter_number (records, attr, search)
       match = /^([><=]=?)?\s*(-?\d+(\.\d+)?)(\s*(or|and|\|\||&&)\s*([><=]=?)?\s*(-?\d+(\.\d+)?))?$/.match(search)
       return records unless match
       
-      selector1 = dt_filter_number_selector(model, attr, match[1], match[2])
+      selector1 = dt_filter_number_selector(attr, match[1], match[2])
       if match[4]
-        selector2 = dt_filter_number_selector(model, attr, match[6], match[7])
+        selector2 = dt_filter_number_selector(attr, match[6], match[7])
         records   = dt_filter_apply(records, match[5], selector1, selector2)
       else
         records   = records.where(selector1)         
@@ -129,28 +129,28 @@ module SinatraAdmin
       records
     end
 
-    def dt_filter_string (model, records, attr, search)
+    def dt_filter_string (records, attr, search)
       records = records.where(attr => /#{search}/i) unless search.blank?
       records
     end
 
-    def dt_filter_boolean (model, records, attr, search)
+    def dt_filter_boolean (records, attr, search)
       value = (/^(true|t|yes|y|1)$/i =~ search) ? true: false
       records = records.where(attr => value);
       records
     end
 
-    def dt_filter_date_selector (model, attr, operator, date)
-      model.unscoped.where(attr => { dt_filter_operator(operator) => date}).selector
+    def dt_filter_date_selector (attr, operator, date)
+      @model.unscoped.where(attr => { dt_filter_operator(operator) => date}).selector
     end
 
-    def dt_filter_time (model, records, attr, search)
+    def dt_filter_time (records, attr, search)
       match = /^([><]?=?)?\s*(\d{4}-\d{2}-\d{2})(\s*(or|and|\|\||&&)([><]?=?)?\s*(\d{4}-\d{2}-\d{2}))?$/.match(search)
       return records unless match
       
-      selector1 = dt_filter_date_selector(model, attr, match[1], match[2])
+      selector1 = dt_filter_date_selector(attr, match[1], match[2])
       if (match[3])
-        selector2 = dt_filter_date_selector(model, attr, match[5], match[6])
+        selector2 = dt_filter_date_selector(attr, match[5], match[6])
         records = dt_filter_apply(records, match[4], selector1, selector2)
       else
         records = records.where(selector1)
