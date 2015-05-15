@@ -75,7 +75,7 @@
   - idx = -1
   - @configure.attribute_names.each do |attr|
     - idx = idx + 1
-    - if @model.fields[attr].type == Object
+    - if attr == "_id"
       - metadata    = @model.fields[attr].options[:metadata]
       - next unless metadata
       - targetRoute = @model.fields[attr].options[:metadata].class_name.to_s.split(/\s|\::/).join('_').underscore.pluralize
@@ -131,7 +131,7 @@
     table.columns().eq(0).each( function(colIdx) {
       var timer = 0;
       var input = $('input', table.column(colIdx).footer());
-      input.on('keyup', function() {
+      input.on('change', function() {
         clearTimeout(timer); 
         var value = $(this).val();
         timer = setTimeout(function(){

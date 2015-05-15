@@ -11,6 +11,9 @@ module SinatraAdmin
           end
 
           get "/#{route}/data/json/?" do
+            p '----------------------'
+            p params
+            #SinatraAdmin::Presenters::DataTable.new(model, configure, params)
             content_type 'application/json'
             dt_json
           end
