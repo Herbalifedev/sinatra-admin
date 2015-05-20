@@ -24,8 +24,24 @@
         %span
           %code= "#{attr}: "
         %span
-          - if attr.eql?("password_hash")
-            *****
-            %a{href: "/admin/#{@route}/#{@resource.id}/change_password"} Change Password
+          - if attr.include?('.')
+            - assoc_key, assoc_attr = attr.split('.')
+            - if assoc_key == assoc_key.pluralize
+              %ul.inline
+                - @resource.send(assoc_key).each do |assoc|
+                  - if assoc_attr == "url"
+                    %li.thumbnail
+                      %img(src="#{assoc.send(assoc_attr)}" style="display: block; margin: 0 auto; width: 72px; height: 72px;")
+                  - else
+                    %li
+                      %span
+                        %code= "#{assoc_attr}: "
+                      %span= assoc.send(assoc_attr)
+            - else
+              = @resource.send(assoc_key).send(assoc_attr)
           - else
-            = @resource.send(attr)
+            - if attr.eql?("password_hash")
+              *****
+              %a{href: "/admin/#{@route}/#{@resource.id}/change_password"} Change Password
+            - else
+              = @resource.send(attr)

@@ -66,21 +66,21 @@
   var columns = [
   - sep = ""
   - @configure.attribute_names.each do |attr|
-    = "#{sep}{\"data\":\"#{attr}\"}"
-    - sep = ","
+    - unless attr.include?('s.')
+      = "#{sep}{\"data\":\"#{attr}\"}"
+      - sep = ","
   ,{"data":null}
   ];
   var columnsDefs = [
   { "render": renderShowLink, "targets": 0 }
-  - idx = -1
+  - idx = 0
   - @configure.attribute_names.each do |attr|
-    - idx = idx + 1
     - if attr == "_id"
       - metadata    = @model.fields[attr].options[:metadata]
       - next unless metadata
       - targetRoute = @model.fields[attr].options[:metadata].class_name.to_s.split(/\s|\::/).join('_').underscore.pluralize
       ,{ "targets":#{idx}, "render": function(data,type,row){ return '<a href="/admin/#{targetRoute}/' + data + '">' + data + '</a>'; } }
-  - idx = idx + 1
+    - idx += 1
   ,{ "render": renderAction, "targets": #{idx}, "searchable": false, "orderable": false }
   ];
 

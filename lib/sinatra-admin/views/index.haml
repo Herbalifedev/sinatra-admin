@@ -16,20 +16,22 @@
     %table.table.table-hover.table-condensed.display{id: 'atable'}
       %thead
         %tr
-          - @configure.attribute_names.each do |attr|
+        - @configure.attribute_names.each do |attr|
+          - unless attr.include?('s.')
             %th
               = attr
-          %th
-            Actions
+        %th
+          Actions
      
       %tbody
 
       %tfoot
         %tr
-          - @configure.attribute_names.each do |attr|
+        - @configure.attribute_names.each do |attr|
+          - unless attr.include?('s.')
             %th
               = attr
-          %th
-            &nbsp;
+        %th
+          &nbsp;
 
 = haml :_index_dt_js
